@@ -1,0 +1,68 @@
+Collect and Analyze
+	Interception:
+		Sniffing attacks:
+			https://capec.mitre.org/data/definitions/31.html
+			https://capec.mitre.org/data/definitions/57.html
+			https://capec.mitre.org/data/definitions/65.html
+			https://capec.mitre.org/data/definitions/158.html
+			https://capec.mitre.org/data/definitions/609.html
+		Eavsdropping:
+			https://capec.mitre.org/data/definitions/634.html
+	Footprinting:
+		Host Discovery:
+			https://capec.mitre.org/data/definitions/612.html
+			https://capec.mitre.org/data/definitions/613.html
+			https://capec.mitre.org/data/definitions/618.html	
+			https://capec.mitre.org/data/definitions/619.html
+		Port Scanning:
+			https://capec.mitre.org/data/definitions/287.html
+			https://capec.mitre.org/data/definitions/301.html
+			https://capec.mitre.org/data/definitions/302.html
+			https://capec.mitre.org/data/definitions/303.html
+			https://capec.mitre.org/data/definitions/304.html
+			https://capec.mitre.org/data/definitions/305.html
+			https://capec.mitre.org/data/definitions/306.html
+			https://capec.mitre.org/data/definitions/307.html
+			https://capec.mitre.org/data/definitions/308.html
+	Protocol Analysis:
+		Cryptanalysis:
+			https://capec.mitre.org/data/definitions/463.html
+			https://capec.mitre.org/data/definitions/608.html
+
+Manipulate System Resources:
+	Infrastructure Manipulation:
+		https://capec.mitre.org/data/definitions/481.html
+		https://capec.mitre.org/data/definitions/571.html
+	Obstruction:
+		Route Disabling:
+			https://capec.mitre.org/data/definitions/584.html
+		Jamming:
+			https://capec.mitre.org/data/definitions/559.html
+			https://capec.mitre.org/data/definitions/604.html
+			https://capec.mitre.org/data/definitions/605.html
+		Blockage:
+			https://capec.mitre.org/data/definitions/589.html
+			https://capec.mitre.org/data/definitions/590.html
+
+Inject Unexpected Items:
+	Resource Injection:
+		https://capec.mitre.org/data/definitions/610.html
+	Traffic Injection:
+		Connection Reset:
+			https://capec.mitre.org/data/definitions/596.html
+	Hardware Fault Injection:
+		https://capec.mitre.org/data/definitions/625.html
+
+Engage in Deceptive Interactions:
+	Content Spoofing:
+		Counterfeit GPS Signals:
+			https://capec.mitre.org/data/definitions/628.html
+	Identity Spoofing:
+		Principal Spoof:
+			https://capec.mitre.org/data/definitions/599.html
+	Resource Location Spoofing:
+		Establish Rogue Location:
+			https://capec.mitre.org/data/definitions/615.html
+			https://capec.mitre.org/data/definitions/617.html
+
+

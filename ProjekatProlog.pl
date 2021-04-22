@@ -1,0 +1,229 @@
+attack(accessing_intercepting_modifyingHTTPCookies).
+likelihood_of_attack(accessing_intercepting_modifyingHTTPCookies, high).
+typical_severity(accessing_intercepting_modifyingHTTPCookies, high).
+prerequisites(accessing_intercepting_modifyingHTTPCookies, relies_on_cookies).
+prerequisites(accessing_intercepting_modifyingHTTPCookies, cookie_contains_sensitive_information).
+prerequisites(accessing_intercepting_modifyingHTTPCookies, response_contains_cookie).
+confidentiality(accessing_intercepting_modifyingHTTPCookies, read_data).
+integrity(accessing_intercepting_modifyingHTTPCookies, modify_data).
+confidentiality_access_control_authorization(accessing_intercepting_modifyingHTTPCookies, gain_privileges).
+
+attack(utilizing_RESTs_Trust_in_the_System_Resource_to_Obtain_Sensitive_Data).
+likelihood_of_attack(utilizing_RESTs_Trust_in_the_System_Resource_to_Obtain_Sensitive_Data, medium).
+typical_severity(utilizing_RESTs_Trust_in_the_System_Resource_to_Obtain_Sensitive_Data, very_high).
+prerequisites(utilizing_RESTs_Trust_in_the_System_Resource_to_Obtain_Sensitive_Data, opportunity_to_intercept_must_exist_beyond_the_point_where_SSL_is_terminated).
+prerequisites(utilizing_RESTs_Trust_in_the_System_Resource_to_Obtain_Sensitive_Data, attacker_can_insert_listener_in_the_client-server_communication_path).
+confidentiality_access_control_authorization(utilizing_RESTs_Trust_in_the_System_Resource_to_Obtain_Sensitive_Data, gain_privileges).
+
+attack(sniff_Application_Code).
+likelihood_of_attack(sniff_Application_Code, low).
+typical_severity(sniff_Application_Code, high).
+prerequisites(sniff_Application_Code, attacker_must_be_placed_in_the_communication_path_between_client_and_server).
+prerequisites(sniff_Application_Code, targeted_application_must_receive_application_code_from_the_server).
+prerequisites(sniff_Application_Code, attacker_must_employ_sniffer_on_network_without_being_detected).
+confidentiality(sniff_Application_Code, read_data).
+confidentiality_access_control_authorization(sniff_Application_Code, gain_privileges).
+
+attack(sniffing_network_traffic).
+typical_severity(sniffing_network_traffic, medium).
+prerequisites(sniffing_network_traffic, target_communication_on_network_protocol_is_visible_by_network_sniffing_application).
+prerequisites(sniffing_network_traffic, adversary_needs_logical_access_to_target_network).
+confidentiality(sniffing_network_traffic, read_data).
+
+attack(cellular_traffic_intercept).
+typical_severity(cellular_traffic_intercept, low).
+prerequisites(cellular_traffic_intercept, none).
+confidentiality(cellular_traffic_intercept, read_data).
+
+attack(probe_audio_and_video_peripherals).
+likelihood_of_attack(probe_audio_and_video_peripherals, low).
+typical_severity(probe_audio_and_video_peripherals, high).
+prerequisites(probe_audio_and_video_peripherals, adversary_must_place_malicious_code_on_target_device).
+confidentiality(probe_audio_and_video_peripherals, read_data).
+
+attack(wifi_MAC_address_tracking).
+typical_severity(wifi_MAC_address_tracking, low).
+prerequisites(wifi_MAC_address_tracking, none).
+
+attack(wifi_SSID_tracking).
+typical_severity(wifi_SSID_tracking, low).
+prerequisites(wifi_SSID_tracking, none).
+
+attack(cellular_broadcast_message_request).
+typical_severity(cellular_broadcast_message_request, low).
+prerequisites(cellular_broadcast_message_request, attacker_knows_targets_phone_number).
+other(cellular_broadcast_message_request, other).
+
+attack(signal_strength_tracking).
+typical_severity(signal_strength_tracking, low).
+prerequisites(signal_strength_tracking, none).
+
+attack(tcp_SYN_scan).
+typical_severity(tcp_SYN_scan, low).
+prerequisites(tcp_SYN_scan, software_is_not_on_windows_XP_SP_2).
+prerequisites(tcp_SYN_scan, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets).
+confidentiality(tcp_SYN_scan, other).
+confidentiality_access_control_authorization(tcp_SYN_scan, bypass_protection_mechanism).
+confidentiality_access_control_authorization(tcp_SYN_scan, hide_activities).
+
+attack(tcp_connect_scan).
+typical_severity(tcp_connect_scan, low).
+prerequisites(tcp_connect_scan, adversary_needs_logical_access_to_the_target_network).
+confidentiality(tcp_connect_scan, read_data).
+
+attack(tcp_FIN_scan).
+typical_severity(tcp_FIN_scan, low).
+prerequisites(tcp_FIN_scan, fin_requires_use_of_raw_sockets).
+prerequisites(tcp_FIN_scan, software_is_not_on_windows_XP_SP_2).
+prerequisites(tcp_FIN_scan, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets).
+confidentiality(tcp_FIN_scan, other).
+confidentiality_access_control_authorization(tcp_FIN_scan, bypass_protection_mechanism).
+confidentiality_access_control_authorization(tcp_FIN_scan, hide_activities).
+
+attack(tcp_xmas_scan).
+typical_severity(tcp_xmas_scan, low).
+prerequisites(tcp_xmas_scan, adversary_needs_logical_access_to_target_network).
+prerequisites(tcp_xmas_scan, xmas_requires_use_of_raw_sockets).
+prerequisites(tcp_xmas_scan, software_is_not_on_windows_XP_SP_2).
+prerequisites(tcp_xmas_scan, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets).
+confidentiality(tcp_xmas_scan, other).
+confidentiality_access_control_authorization(tcp_xmas_scan, bypass_protection_mechanism).
+confidentiality_access_control_authorization(tcp_xmas_scan, hide_activities).
+availability(tcp_xmas_scan, unreliable_execution).
+
+attack(tcp_null_scan).
+typical_severity(tcp_null_scan, low).
+prerequisites(tcp_null_scan, adversary_needs_logical_access_to_target_network).
+prerequisites(tcp_null_scan, xmas_requires_use_of_raw_sockets).
+prerequisites(tcp_null_scan, software_is_not_on_windows_XP_SP_2).
+prerequisites(tcp_null_scan, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets).
+confidentiality(tcp_null_scan, other).
+confidentiality_access_control_authorization(tcp_null_scan, bypass_protection_mechanism).
+confidentiality_access_control_authorization(tcp_null_scan, hide_activities).
+
+attack(tcp_ACK_scan).
+typical_severity(tcp_ACK_scan, low).
+prerequisites(tcp_ACK_scan, adversary_needs_logical_access_to_target_network).
+prerequisites(tcp_ACK_scan, xmas_requires_use_of_raw_sockets).
+prerequisites(tcp_ACK_scan, software_is_not_on_windows_XP_SP_2).
+prerequisites(tcp_ACK_scan, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets).
+confidentiality(tcp_ACK_scan, other).
+confidentiality_access_control_authorization(tcp_ACK_scan, bypass_protection_mechanism).
+confidentiality_access_control_authorization(tcp_ACK_scan, hide_activities).
+
+attack(tcp_window_scan).
+typical_severity(tcp_window_scan, low).
+prerequisites(tcp_window_scan, xmas_requires_use_of_raw_sockets).
+prerequisites(tcp_window_scan, software_is_not_on_windows_XP_SP_2).
+prerequisites(tcp_window_scan, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets).
+confidentiality(tcp_window_scan, other).
+confidentiality_access_control_authorization(tcp_window_scan, bypass_protection_mechanism).
+confidentiality_access_control_authorization(tcp_window_scan, hide_activities).
+
+attack(tcp_RPC_scan).
+typical_severity(tcp_RPC_scan, low).
+prerequisites(tcp_RPC_scan, none).
+confidentiality(tcp_RPC_scan, other).
+confidentiality_access_control_authorization(tcp_RPC_scan, bypass_protection_mechanism).
+confidentiality_access_control_authorization(tcp_RPC_scan, hide_activities).
+
+attack(udp_scan).
+typical_severity(udp_scan, low).
+prerequisites(udp_scan, ability_to_send_UDP_datagrams_to_host_and_receive_ICMP_error_from_that_host).
+confidentiality(udp_scan, other).
+confidentiality_access_control_authorization(udp_scan, bypass_protection_mechanism).
+confidentiality_access_control_authorization(udp_scan, hide_activities).
+
+attack(padding_oracle_crypto_attack).
+typical_severity(padding_oracle_crypto_attack, high).
+prerequisites(padding_oracle_crypto_attack, decrtypton_routine_does_not_work_propely).
+prerequisites(padding_oracle_crypto_attack, target_system_leaks_data).
+prerequisites(padding_oracle_crypto_attack, padding_oracle_remains_available_for_enough_time).
+
+attack(cryptanalysis_of_cellular_encryption).
+typical_severity(cryptanalysis_of_cellular_encryption, high).
+prerequisites(cryptanalysis_of_cellular_encryption, none).
+confidentiality(cryptanalysis_of_cellular_encryption, other).
+
+attack(contradictory_destinations_in_traffic_routing_schemes).
+likelihood_of_attack(contradictory_destinations_in_traffic_routing_schemes, medium).
+typical_severity(contradictory_destinations_in_traffic_routing_schemes, high).
+prerequisites(contradictory_destinations_in_traffic_routing_schemes, adversary_must_be_aware_that_their_message_will_be_routed_using_CDN).
+confidentiality(contradictory_destinations_in_traffic_routing_schemes, read_data).
+confidentiality(contradictory_destinations_in_traffic_routing_schemes, modify_data).
+
+attack(block_logging_to_central_repository).
+typical_severity(block_logging_to_central_repository, low).
+prerequisites(block_logging_to_central_repository, none).
+
+attack(bgp_route_disabling).
+typical_severity(bgp_route_disabling, unknown).
+prerequisites(bgp_route_disabling, adversary_must_have_control_of_router_that_manipulate_BGP_updates).
+availability(bgp_route_disabling, other).
+
+attack(orbital_jamming).
+likelihood_of_attack(orbital_jamming, low).
+typical_severity(orbital_jamming, high).
+prerequisites(orbital_jamming, attack_requires_knowladge_of_the_satellites_coordinates_for_targeting).
+availability(orbital_jamming, other).
+
+attack(wifi_jamming).
+likelihood_of_attack(wifi_jamming, medium).
+typical_severity(wifi_jamming, high).
+prerequisites(wifi_jamming, lack_of_anti-jam_features_in_802_11).
+prerequisites(wifi_jamming, lack_of_authentication_on_deauthentication/disassociation_packets_on_802_11-based_networks).
+availability(wifi_jamming, other).
+availability(wifi_jamming, resource_consumption).
+
+attack(cellular_jamming).
+typical_severity(cellular_jamming, low).
+prerequisites(cellular_jamming, lack_of_anti-jam_features_in_cellular_technology).
+availability(cellular_jamming, resource_consumption).
+
+attack(dns_blocking).
+typical_severity(dns_blocking, unknown).
+prerequisites(dns_blocking, attack_requires_ability_to_conduct_deep_packet_inspection_with_an_InPath_device_that_can_drop_the_targeted_traffic_and/or_connection).
+availability(dns_blocking, other).
+
+attack(ip_address_blocking).
+likelihood_of_attack(ip_address_blocking, low).
+typical_severity(ip_address_blocking, high).
+prerequisites(ip_address_blocking, attack_requires_ability_to_conduct_deep_packet_inspection_with_an_InPath_device_that_can_drop_the_targeted_traffic_and/or_connection).
+availability(ip_address_blocking, other).
+
+attack(cellular_data_injection).
+typical_severity(cellular_data_injection, high).
+prerequisites(cellular_data_injection, none).
+availability(cellular_data_injection, modify_data).
+availability(cellular_data_injection, resource_consumption).
+
+attack(tcp_RST_injection).
+typical_severity(tcp_RST_injection, unknown).
+prerequisites(tcp_RST_injection, an_on/in_path_device).
+
+attack(mobile_device_fault_injection).
+typical_severity(mobile_device_fault_injection, unknown).
+prerequisites(mobile_device_fault_injection, none).
+confidentiality_access_control(mobile_device_fault_injection, read_data).
+
+attack(carry_off_GPS_attack).
+likelihood_of_attack(carry_off_GPS_attack, low).
+typical_severity(carry_off_GPS_attack, high).
+prerequisites(carry_off_GPS_attack, target_must_be_relying_on_valid_GPS_signal_to_preform_critical_operations).
+
+attack(terrestrial_jamming).
+likelihood_of_attack(terrestrial_jamming, low).
+typical_severity(terrestrial_jamming, high).
+prerequisites(terrestrial_jamming, none).
+availability(terrestrial_jamming, other).
+
+attack(evil_twin_wifi_attack).
+typical_severity(evil_twin_wifi_attack, low).
+prerequisites(evil_twin_wifi_attack, none).
+confidentiality(evil_twin_wifi_attack, read_data).
+
+attack(cellular_rogue_base_station).
+typical_severity(cellular_rogue_base_station, low).
+prerequisites(cellular_rogue_base_station, none).
+confidentiality(cellular_rogue_base_station, read_data).
+
