@@ -138,7 +138,21 @@ RULEBLOCK blok1
     RULE 34 : IF report_confidence IS unknown THEN severity_score IS low;
     RULE 35 : IF report_confidence IS reasonable THEN severity_score IS medium;
     RULE 36 : IF report_confidence IS confirmed THEN severity_score IS high;
-	
+	RULE 37 : IF confidentiality IS none AND integrity IS none AND availability IS none THEN severity_score IS none;
+	RULE 38 : IF attack_vector IS physical AND confidentiality IS high THEN severity_score IS medium;
+	RULE 39 : IF attack_vector IS physical AND integrity IS high THEN severity_score IS medium;
+	RULE 40 : IF attack_vector IS physical AND availability IS high THEN severity_score IS medium;
+	RULE 41 : IF attack_vector IS physical AND integrity IS low THEN severity_score IS low;
+	RULE 42 : IF attack_vector IS network AND attack_complexity IS high AND integrity IS low THEN severity_score IS low;
+	RULE 43 : IF attack_vector IS local AND user_interaction IS required AND confidentiality IS high AND integrity IS high THEN severity_score IS high;
+	RULE 44 : IF attack_vector IS network AND user_interaction IS required AND confidentiality IS high AND scope IS changed AND integrity IS high AND availability IS high AND attack_complexity IS low AND priviliges_required IS none THEN severity_score IS critical;
+	RULE 45 : IF attack_vector IS network AND user_interaction IS required AND confidentiality IS high AND scope IS changed AND integrity IS high AND availability IS high AND attack_complexity IS high AND priviliges_required IS high THEN severity_score IS high;
+	RULE 46 : IF attack_vector IS network AND user_interaction IS required AND confidentiality IS none AND scope IS changed AND integrity IS none AND availability IS high AND attack_complexity IS high AND priviliges_required IS high THEN severity_score IS medium;
+	RULE 47 : IF attack_vector IS network AND user_interaction IS required AND confidentiality IS none AND scope IS changed AND integrity IS none AND availability IS low AND attack_complexity IS high AND priviliges_required IS high THEN severity_score IS low;
+	RULE 48 : IF attack_vector IS network AND user_interaction IS required AND confidentiality IS low AND scope IS changed AND integrity IS none AND availability IS high AND attack_complexity IS high AND priviliges_required IS high THEN severity_score IS medium;
+	RULE 49 : IF attack_vector IS physical AND user_interaction IS required AND confidentiality IS none AND scope IS unchanged AND integrity IS none AND availability IS high AND attack_complexity IS high AND priviliges_required IS high THEN severity_score IS low;
+	RULE 50 : IF attack_vector IS adjacent AND user_interaction IS required AND confidentiality IS high AND scope IS unchanged AND integrity IS low AND availability IS high AND attack_complexity IS high AND priviliges_required IS high THEN severity_score IS medium;
+
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK
