@@ -5,13 +5,10 @@ import { Table } from "reactstrap";
 import { Card } from "reactstrap";
 import { connect } from "react-redux";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import MitigationsModal from "./MitigationsModal";
 
-class CBRAttacksModal extends Component {
+class BayesAttacksModal extends Component {
   state = {
     showPostModal: this.props.show,
-    showMitigationsModal: false,
-    mitigation: "",
   };
 
   render() {
@@ -28,13 +25,6 @@ class CBRAttacksModal extends Component {
           Attacks overview
         </ModalHeader>
         <ModalBody>
-          {this.state.showMitigationsModal ? (
-            <MitigationsModal
-              show={this.state.showMitigationsModal}
-              mitigation={this.state.mitigation}
-              onShowChange={this.displayModalPost.bind(this)}
-            />
-          ) : null}
           <Card
             className="mt-5"
             style={{ shadowColor: "gray", boxShadow: "0 8px 6px -6px #999" }}
@@ -55,16 +45,6 @@ class CBRAttacksModal extends Component {
                         ).toFixed(2)}%`}
                       />
                     </td>
-                    <td style={{ textAlign: "center" }}>
-                      <button
-                        onClick={() => {
-                          this.displayModalPost(f.mitigations);
-                        }}
-                        className="btn btn-primary mb-2"
-                      >
-                        Mitigations
-                      </button>
-                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -76,14 +56,6 @@ class CBRAttacksModal extends Component {
     );
   }
 
-  displayModalPost(mitigation) {
-    debugger;
-    this.setState({
-      mitigation: mitigation,
-      showMitigationsModal: !this.state.showMitigationsModal,
-    });
-  }
-
   toggle() {
     debugger;
     this.setState({ showPostModal: false });
@@ -93,4 +65,4 @@ class CBRAttacksModal extends Component {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, {})(CBRAttacksModal);
+export default connect(mapStateToProps, {})(BayesAttacksModal);

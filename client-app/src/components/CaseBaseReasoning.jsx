@@ -214,6 +214,8 @@ class CaseBaseReasoning extends Component {
             onShowChange={this.displayModalPost.bind(this)}
           />
         ) : null}
+        <h3 className="mt-4">Choose attacks characteristics</h3>
+        <hr />
         <div className="mt-5">
           <div className="d-inline-flex w-50">
             <div class="form-group w-100 pr-5">

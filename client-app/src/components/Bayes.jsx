@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getBayes } from "../actions/actions";
+import BayesAttacksModal from "./BayesAttacksModal";
 
 class Bayes extends Component {
   state = {
@@ -24,6 +26,15 @@ class Bayes extends Component {
     debugger;
     return (
       <React.Fragment>
+        {this.state.showPostModal ? (
+          <BayesAttacksModal
+            show={this.state.showPostModal}
+            attacks={this.state.attacks}
+            onShowChange={this.displayModalPost.bind(this)}
+          />
+        ) : null}
+        <h3 className="mt-4">Choose characteristics</h3>
+        <hr />
         <div className="mt-5">
           <div className="d-inline-flex w-50">
             <div class="form-group w-100 pr-5">
@@ -70,10 +81,10 @@ class Bayes extends Component {
               <label for="lastName">Number Of Employees:</label>
               <select
                 style={{ width: 500, maxWidth: 500 }}
-                value={this.state.likelihoodOfAttack}
+                value={this.state.numberOfEmployees}
                 class="form-control"
                 onChange={this.handleChange}
-                name="likelihoodOfAttack"
+                name="numberOfEmployees"
               >
                 <option value=""> </option>
                 <option value="0">1-250</option>
@@ -122,19 +133,85 @@ class Bayes extends Component {
           </div>
           <div className="d-inline-flex w-50">
             <div class="form-group w-100 pr-5">
-              <label for="lastName">Likelihood of attack:</label>
+              <label for="lastName">Security control:</label>
               <select
                 style={{ width: 500, maxWidth: 500 }}
-                value={this.state.likelihoodOfAttack}
+                value={this.state.securityControl}
                 class="form-control"
                 onChange={this.handleChange}
-                name="likelihoodOfAttack"
+                name="securityControl"
               >
                 <option value=""> </option>
-                <option value="unkown">Unkown</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+                <option value="0">Yes</option>
+                <option value="1">No</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className="mt-5">
+          <div className="d-inline-flex w-50">
+            <div class="form-group w-100 pr-5">
+              <label for="lastName">IT department:</label>
+              <select
+                style={{ width: 500, maxWidth: 500 }}
+                value={this.state.itDepartment}
+                class="form-control"
+                onChange={this.handleChange}
+                name="itDepartment"
+              >
+                <option value=""> </option>
+                <option value="0">Exists</option>
+                <option value="1">Doesn't exist</option>
+              </select>
+            </div>
+          </div>
+          <div className="d-inline-flex w-50">
+            <div class="form-group w-100 pr-5">
+              <label for="lastName">System age:</label>
+              <select
+                style={{ width: 500, maxWidth: 500 }}
+                value={this.state.systemAge}
+                class="form-control"
+                onChange={this.handleChange}
+                name="systemAge"
+              >
+                <option value=""> </option>
+                <option value="0">{"<5"}</option>
+                <option value="1">5+</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className="mt-5">
+          <div className="d-inline-flex w-50">
+            <div class="form-group w-100 pr-5">
+              <label for="lastName">International company:</label>
+              <select
+                style={{ width: 500, maxWidth: 500 }}
+                value={this.state.internationalCompany}
+                class="form-control"
+                onChange={this.handleChange}
+                name="internationalCompany"
+              >
+                <option value=""> </option>
+                <option value="0">Yes</option>
+                <option value="1">No</option>
+              </select>
+            </div>
+          </div>
+          <div className="d-inline-flex w-50">
+            <div class="form-group w-100 pr-5">
+              <label for="lastName">Static IP:</label>
+              <select
+                style={{ width: 500, maxWidth: 500 }}
+                value={this.state.staticIp}
+                class="form-control"
+                onChange={this.handleChange}
+                name="staticIp"
+              >
+                <option value=""> </option>
+                <option value="0">Yes</option>
+                <option value="1">No</option>
               </select>
             </div>
           </div>
@@ -153,7 +230,31 @@ class Bayes extends Component {
     );
   }
 
-  async generate() {}
+  displayModalPost(attacks) {
+    debugger;
+    this.setState({
+      attacks: attacks,
+      showPostModal: !this.state.showPostModal,
+    });
+  }
+
+  async generate() {
+    debugger;
+    const parameters = {
+      country: this.state.country,
+      industry: this.state.industry,
+      numberOfEmployees: this.state.numberOfEmployees,
+      os: this.state.os,
+      typeOfDataLost: this.state.typeOfDataLost,
+      securityControl: this.state.securityControl,
+      itDepartment: this.state.itDepartment,
+      systemAge: this.state.systemAge,
+      internationalCompany: this.state.internationalCompany,
+      staticIp: this.state.staticIp,
+    };
+    await this.props.getBayes(parameters);
+    this.displayModalPost(this.props.bayes);
+  }
 
   handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -164,6 +265,9 @@ class Bayes extends Component {
   };
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({ bayes: state.bayes });
 
-export default compose(withRouter, connect(mapStateToProps, {}))(Bayes);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, { getBayes })
+)(Bayes);

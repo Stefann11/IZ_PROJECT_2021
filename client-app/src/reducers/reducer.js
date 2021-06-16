@@ -1,7 +1,8 @@
-import { GET_CBR } from "../types/types";
+import { GET_CBR, GET_BAYES } from "../types/types";
 
 const initialState = {
   cbr: [],
+  bayes: [],
 };
 
 function reducer(state = initialState, action) {
@@ -10,6 +11,11 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         cbr: action.payload,
+      };
+    case GET_BAYES:
+      return {
+        ...state,
+        bayes: action.payload,
       };
     default:
       return state;

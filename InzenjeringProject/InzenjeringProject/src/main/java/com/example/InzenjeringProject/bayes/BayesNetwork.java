@@ -25,7 +25,7 @@ public class BayesNetwork {
 
 		ProbabilisticNetwork net = new ProbabilisticNetwork("example");
 		 BaseIO io = new NetIO();
-		 net = (ProbabilisticNetwork)io.load(new File("C:\\8. semestar\\Inzenjering znanja\\BayesExample\\src\\example\\BayesNetworkJava.net"));
+		 net = (ProbabilisticNetwork)io.load(new File("C:\\Inzenjering Znanja Projekat\\IZ_PROJECT_2021\\InzenjeringProject\\InzenjeringProject\\data\\BayesNetworkJava.net"));
 
 		// compiling
 		IInferenceAlgorithm algorithm = new JunctionTreeAlgorithm();
