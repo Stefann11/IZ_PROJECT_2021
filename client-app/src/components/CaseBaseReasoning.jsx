@@ -4,9 +4,13 @@ import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { Multiselect } from "multiselect-react-dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getCbr } from "../actions/actions";
+import CBRAttacksModal from "./CBRAttacksModal";
 
 class CaseBaseReasoning extends Component {
   state = {
+    attacks: [],
+    showPostModal: false,
     likelihoodOfAttack: "",
     typicalSeverity: "",
     selectedPrerequisites: [],
@@ -203,6 +207,13 @@ class CaseBaseReasoning extends Component {
     debugger;
     return (
       <React.Fragment>
+        {this.state.showPostModal ? (
+          <CBRAttacksModal
+            show={this.state.showPostModal}
+            attacks={this.state.attacks}
+            onShowChange={this.displayModalPost.bind(this)}
+          />
+        ) : null}
         <div className="mt-5">
           <div className="d-inline-flex w-50">
             <div class="form-group w-100 pr-5">
@@ -308,8 +319,10 @@ class CaseBaseReasoning extends Component {
         </div>
         <div style={{ textAlign: "right" }} className="mt-5 pb-5 w-100">
           <button
-            className="btn btn-primary btn-lg btn-block"
-            onClick={this.generate.bind(this)}
+            className="btn btn-primary btn-lg btn-block w-100"
+            onClick={() => {
+              this.generate();
+            }}
           >
             Generate
           </button>
@@ -318,7 +331,61 @@ class CaseBaseReasoning extends Component {
     );
   }
 
-  generate() {}
+  displayModalPost(attacks) {
+    debugger;
+    this.setState({
+      attacks: attacks,
+      showPostModal: !this.state.showPostModal,
+    });
+  }
+
+  async generate() {
+    var prerequisites = "";
+    this.state.selectedPrerequisites.forEach(
+      (element) => (prerequisites = prerequisites.concat(", " + element.value))
+    );
+    prerequisites = prerequisites.substring(2, prerequisites.length);
+
+    var availability = "";
+    this.state.selectedAvailability.forEach(
+      (element) => (availability = availability.concat(", " + element.value))
+    );
+    availability = availability.substring(2, availability.length);
+
+    var confidentiality = "";
+    this.state.selectedConfidentiality.forEach(
+      (element) =>
+        (confidentiality = confidentiality.concat(", " + element.value))
+    );
+    confidentiality = confidentiality.substring(2, confidentiality.length);
+
+    var confidentialityAccessControlAuthorization = "";
+    this.state.selectedConfidentialityAccessControlAuthorization.forEach(
+      (element) =>
+        (confidentialityAccessControlAuthorization =
+          confidentialityAccessControlAuthorization.concat(
+            ", " + element.value
+          ))
+    );
+    confidentialityAccessControlAuthorization =
+      confidentialityAccessControlAuthorization.substring(
+        2,
+        confidentialityAccessControlAuthorization.length
+      );
+
+    const parameters = {
+      likelihoodOfAttack: this.state.likelihoodOfAttack,
+      typicalSeverity: this.state.typicalSeverity,
+      prerequisites: prerequisites,
+      availability: availability,
+      confidentiality: confidentiality,
+      confidentialityAccessControlAuthorization:
+        confidentialityAccessControlAuthorization,
+    };
+    debugger;
+    await this.props.getCbr(parameters);
+    this.displayModalPost(this.props.cbr);
+  }
 
   onSelectConfidentialityAccessControlAuthorization = (
     selectedList,
@@ -379,9 +446,11 @@ class CaseBaseReasoning extends Component {
   };
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  cbr: state.cbr,
+});
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, {})
+  connect(mapStateToProps, { getCbr })
 )(CaseBaseReasoning);
