@@ -1,7 +1,10 @@
 package com.example.InzenjeringProject.bayes;
 
 import com.example.InzenjeringProject.dto.BayesResultDTO;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import unbbayes.io.BaseIO;
 import unbbayes.io.NetIO;
 import unbbayes.prs.Node;
@@ -11,6 +14,7 @@ import unbbayes.prs.bn.ProbabilisticNode;
 import unbbayes.util.extension.bn.inference.IInferenceAlgorithm;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,8 +28,9 @@ public class BayesNetwork {
 									int staticIp) throws Exception {
 
 		ProbabilisticNetwork net = new ProbabilisticNetwork("example");
-		 BaseIO io = new NetIO();
-		 net = (ProbabilisticNetwork)io.load(new File("C:\\Inzenjering Znanja Projekat\\IZ_PROJECT_2021\\InzenjeringProject\\InzenjeringProject\\data\\BayesNetworkJava.net"));
+		BaseIO io = new NetIO();
+		File file = ResourceUtils.getFile("classpath:BayesNetworkJava.net");
+		net = (ProbabilisticNetwork)io.load(file);
 
 		// compiling
 		IInferenceAlgorithm algorithm = new JunctionTreeAlgorithm();

@@ -38,7 +38,7 @@ public class BayesController {
             result = bayesNetwork.run(country, industry, numberOfEmployees, os,
                     typeOfDataLost, securityControl, itDepartment, systemAge, internationalCompany, staticIp);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
 
