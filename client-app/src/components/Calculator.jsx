@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getSeverityScore } from "../actions/actions";
 
 class Calculator extends Component {
   state = {
-    score: 1,
+    score: 0,
     attackVector: "",
     attackComplexity: "",
-    priviligesRequired: "",
+    privilegesRequired: "",
     userInteraction: "",
     scope: "",
     confidentiality: "",
@@ -68,10 +69,10 @@ class Calculator extends Component {
               <label for="lastName">Privileges Required (PR)</label>
               <select
                 style={{ width: 500, maxWidth: 500 }}
-                value={this.state.priviligesRequired}
+                value={this.state.privilegesRequired}
                 class="form-control"
                 onChange={this.handleChange}
-                name="priviligesRequired"
+                name="privilegesRequired"
               >
                 <option value=""> </option>
                 <option value="0.85">None (N)</option>
@@ -110,7 +111,7 @@ class Calculator extends Component {
               >
                 <option value=""> </option>
                 <option value="0.5">Unchanged (U)</option>
-                <option value="1">Changed (C)</option>
+                <option value="1.0">Changed (C)</option>
               </select>
             </div>
           </div>
@@ -125,7 +126,7 @@ class Calculator extends Component {
                 name="confidentiality"
               >
                 <option value=""> </option>
-                <option value="0">None (N)</option>
+                <option value="0.0">None (N)</option>
                 <option value="0.22">Low (L)</option>
                 <option value="0.56">High (H)</option>
               </select>
@@ -144,7 +145,7 @@ class Calculator extends Component {
                 name="integrity"
               >
                 <option value=""> </option>
-                <option value="0">None (N)</option>
+                <option value="0.0">None (N)</option>
                 <option value="0.22">Low (L)</option>
                 <option value="0.56">High (H)</option>
               </select>
@@ -161,7 +162,7 @@ class Calculator extends Component {
                 name="availability"
               >
                 <option value=""> </option>
-                <option value="0">None (N)</option>
+                <option value="0.0">None (N)</option>
                 <option value="0.22">Low (L)</option>
                 <option value="0.56">High (H)</option>
               </select>
@@ -180,7 +181,7 @@ class Calculator extends Component {
                 name="exploitCodeMaturity"
               >
                 <option value=""> </option>
-                <option value="1">Not Defined (X)</option>
+                <option value="1.0">Not Defined (X)</option>
                 <option value="0.91">Unproven (U)</option>
                 <option value="0.94">Proof-Of-Concept (P)</option>
                 <option value="0.97">Functional (F)</option>
@@ -199,7 +200,7 @@ class Calculator extends Component {
                 name="remediationLevel"
               >
                 <option value=""> </option>
-                <option value="1">Not Defined (X)</option>
+                <option value="1.0">Not Defined (X)</option>
                 <option value="0.95">Official Fix (O)</option>
                 <option value="0.96">Temporary Fix (T)</option>
                 <option value="0.97">Workaround (W)</option>
@@ -220,7 +221,7 @@ class Calculator extends Component {
                 name="reportConfidence"
               >
                 <option value=""> </option>
-                <option value="1">Not Defined (X)</option>
+                <option value="1.0">Not Defined (X)</option>
                 <option value="0.92">Unknown (U)</option>
                 <option value="0.96">Reasonable (R)</option>
                 <option value="0.99">Confirmed (C)</option>
@@ -234,7 +235,7 @@ class Calculator extends Component {
             disabled={
               this.state.attackVector === "" ||
               this.state.attackComplexity === "" ||
-              this.state.priviligesRequired === "" ||
+              this.state.privilegesRequired === "" ||
               this.state.userInteraction === "" ||
               this.state.scope === "" ||
               this.state.confidentiality === "" ||
@@ -255,19 +256,20 @@ class Calculator extends Component {
           <button
             style={{ width: 300 }}
             className={
-              this.state.score < 4
+              this.state.score === 0
+                ? "btn btn-secondary btn-lg btn-block"
+                : this.state.score < 4
                 ? "btn btn-success btn-lg btn-block"
                 : this.state.score < 8
                 ? "btn btn-warning btn-lg btn-block "
                 : "btn btn-danger btn-lg btn-block "
             }
-            onClick={() => {
-              this.generate();
-            }}
           >
             <label>
-              {this.state.score} <br /> ({" "}
-              {this.state.score < 4
+              {this.state.score.toFixed(2)} <br /> ({" "}
+              {this.state.score === 0
+                ? "None"
+                : this.state.score < 4
                 ? "Low"
                 : this.state.score < 8
                 ? "Medium"
@@ -288,7 +290,25 @@ class Calculator extends Component {
     });
   }
 
-  async generate() {}
+  async generate() {
+    const parameters = {
+      attackComplexity: this.state.attackComplexity,
+      attackVector: this.state.attackVector,
+      availability: this.state.availability,
+      confidentiality: this.state.confidentiality,
+      exploitCodeMaturity: this.state.exploitCodeMaturity,
+      integrity: this.state.integrity,
+      privilegesRequired: this.state.privilegesRequired,
+      remediationLevel: this.state.remediationLevel,
+      reportConfidence: this.state.reportConfidence,
+      scope: this.state.scope,
+      userInteraction: this.state.userInteraction,
+    };
+    await this.props.getSeverityScore(parameters);
+    this.setState({
+      score: this.props.severityScore,
+    });
+  }
 
   handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -299,6 +319,9 @@ class Calculator extends Component {
   };
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({ severityScore: state.severityScore });
 
-export default compose(withRouter, connect(mapStateToProps, {}))(Calculator);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, { getSeverityScore })
+)(Calculator);
