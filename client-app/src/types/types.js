@@ -4,3 +4,7 @@ export const GET_BAYES = "getBayes";
 export const GET_BAYES_ERROR = "getBayesError";
 export const GET_SEVERITY_SCORE = "getSeverityScore";
 export const GET_SEVERITY_SCORE_ERROR = "getSeverityScoreError";
+export const CREATE_ATTACK = "createAttack";
+export const CREATE_ATTACK_ERROR = "createAttackError";
+export const GET_ATTACKS = "getAttacks";
+export const GET_ATTACKS_ERROR = "getAttacksError";

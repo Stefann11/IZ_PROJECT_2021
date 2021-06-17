@@ -1,4 +1,9 @@
-import { GET_CBR, GET_BAYES, GET_SEVERITY_SCORE } from "../types/types";
+import {
+  GET_CBR,
+  GET_BAYES,
+  GET_SEVERITY_SCORE,
+  CREATE_ATTACK,
+} from "../types/types";
 
 const initialState = {
   cbr: [],
@@ -22,6 +27,10 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         severityScore: action.payload,
+      };
+    case CREATE_ATTACK:
+      return {
+        ...state,
       };
     default:
       return state;

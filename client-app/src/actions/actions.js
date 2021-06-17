@@ -5,6 +5,8 @@ import {
   GET_BAYES_ERROR,
   GET_SEVERITY_SCORE,
   GET_SEVERITY_SCORE_ERROR,
+  CREATE_ATTACK,
+  CREATE_ATTACK_ERROR,
 } from "../types/types";
 import axios from "axios";
 
@@ -93,6 +95,25 @@ export const getSeverityScore = (parameters) => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: GET_SEVERITY_SCORE_ERROR,
+      payload: console.log(e),
+    });
+  }
+};
+
+export const createAttack = (attack) => async (dispatch) => {
+  debugger;
+  try {
+    const response = await axios.post("http://localhost:8081/api/rdf", attack, {
+      headers: { "Access-Control-Allow-Origin": "*" },
+    });
+    debugger;
+    dispatch({
+      type: CREATE_ATTACK,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({
+      type: CREATE_ATTACK_ERROR,
       payload: console.log(e),
     });
   }

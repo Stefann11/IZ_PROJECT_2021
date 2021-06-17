@@ -3,6 +3,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Multiselect } from "multiselect-react-dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { connect } from "react-redux";
+import { createAttack } from "../actions/actions";
 
 class CreateNewAttackModal extends Component {
   state = {
@@ -541,8 +542,59 @@ class CreateNewAttackModal extends Component {
     );
   }
 
-  create() {
-    this.toggle();
+  async create() {
+    var prerequisites = "";
+    this.state.selectedPrerequisites.forEach(
+      (element) => (prerequisites = prerequisites.concat(", " + element.value))
+    );
+    prerequisites = prerequisites.substring(2, prerequisites.length);
+
+    var availability = "";
+    this.state.selectedAvailability.forEach(
+      (element) => (availability = availability.concat(", " + element.value))
+    );
+    availability = availability.substring(2, availability.length);
+
+    var confidentiality = "";
+    this.state.selectedConfidentiality.forEach(
+      (element) =>
+        (confidentiality = confidentiality.concat(", " + element.value))
+    );
+    confidentiality = confidentiality.substring(2, confidentiality.length);
+
+    var confidentialityAccessControlAuthorization = "";
+    this.state.selectedConfidentialityAccessControlAuthorization.forEach(
+      (element) =>
+        (confidentialityAccessControlAuthorization =
+          confidentialityAccessControlAuthorization.concat(
+            ", " + element.value
+          ))
+    );
+    confidentialityAccessControlAuthorization =
+      confidentialityAccessControlAuthorization.substring(
+        2,
+        confidentialityAccessControlAuthorization.length
+      );
+
+    var mitigations = "";
+    this.state.selectedMitigations.forEach(
+      (element) => (mitigations = mitigations.concat(", " + element.value))
+    );
+    mitigations = mitigations.substring(2, mitigations.length);
+    const parameters = {
+      attack: this.state.name,
+      availability: availability,
+      confidentiality: confidentiality,
+      confidentiality_access_control_authorization:
+        confidentialityAccessControlAuthorization,
+      likelihood_of_attack: this.state.likelihoodOfAttack,
+      mitigations: mitigations,
+      name: this.state.name,
+      prerequisites: prerequisites,
+      typical_severity: this.state.typicalSeverity,
+    };
+    debugger;
+    await this.props.createAttack(parameters);
   }
 
   onSelectMitigations = (selectedList, selectedItem) => {
@@ -626,4 +678,4 @@ class CreateNewAttackModal extends Component {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, {})(CreateNewAttackModal);
+export default connect(mapStateToProps, { createAttack })(CreateNewAttackModal);
