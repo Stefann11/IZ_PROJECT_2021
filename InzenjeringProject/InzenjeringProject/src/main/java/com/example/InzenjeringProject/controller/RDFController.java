@@ -30,4 +30,11 @@ public class RDFController {
     {
         return new ResponseEntity<List<RDFAttackDTO>>(rdfService.getAll(), HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping()
+    public ResponseEntity<RDFAttackDTO> update(@RequestBody RDFAttackDTO dto)
+    {
+        return new ResponseEntity<RDFAttackDTO>(rdfService.update(dto), HttpStatus.OK);
+    }
 }

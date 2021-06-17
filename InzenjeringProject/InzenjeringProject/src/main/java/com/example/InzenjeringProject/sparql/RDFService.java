@@ -73,15 +73,63 @@ public class RDFService {
                 Literal name = solution.getLiteral("name");
                 Literal prerequisites = solution.getLiteral("prerequisites");
                 Literal typical_severity = solution.getLiteral("typical_severity");
-                result.add(new RDFAttackDTO(attack.getLocalName(), availability.toString(),
-                        confidentiality.toString(), confidentiality_access_control_authorization.toString(),
-                        likelihood_of_attack.toString(), mitigations.toString(),
-                        name.toString(), prerequisites.toString(), typical_severity.toString()));
+                result.add(new RDFAttackDTO(attack.getLocalName(), availability.getString(),
+                        confidentiality.getString(), confidentiality_access_control_authorization.getString(),
+                        likelihood_of_attack.getString(), mitigations.getString(),
+                        name.getString(), prerequisites.getString(), typical_severity.getString()));
             }
             return  result;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return  result;
+    }
+
+    public RDFAttackDTO delete(RDFAttackDTO attack) {
+        String insertString = ""
+                + "PREFIX attacks: <http://www.ftn.uns.ac.rs/attacks#> "
+                + "PREFIX xsd:   <http://w3.org/2001/XMLSchema#> "
+                + "INSERT DATA {"
+                + "    attacks:" + LocalDateTime.now() + " a attacks:Attack;" +
+                "	   attacks:availability \"" + attack.getAvailability() + "\"^^xsd:string;" +
+                "	   attacks:confidentiality \"" + attack.getConfidentiality() + "\"^^xsd:string;" +
+                "	   attacks:confidentiality_access_control_authorization \"" + attack.getConfidentiality_access_control_authorization() + "\"^^xsd:string;" +
+                "	   attacks:likelihood_of_attack \"" + attack.getLikelihood_of_attack() + "\"^^xsd:string;" +
+                "	   attacks:mitigations \"asd\"^^xsd:string;" +
+                "	   attacks:name \"asd\"^^xsd:string;" +
+                "	   attacks:prerequisites \"" + attack.getPrerequisites() + "\"^^xsd:string;" +
+                "	   attacks:typical_severity \"" + attack.getTypical_severity() + "\"^^xsd:string;" +
+                "}";
+        System.out.println(insertString);
+        UpdateRequest updateRequest = UpdateFactory.create(insertString);
+        UpdateProcessor updateProcessor = UpdateExecutionFactory.createRemote(updateRequest, UPDATE_URL);
+        updateProcessor.execute();
+        return  attack;
+    }
+
+    public RDFAttackDTO update(RDFAttackDTO attack) {
+        String insertString = ""
+                + "PREFIX attacks: <http://www.ftn.uns.ac.rs/attacks#> "
+                + "PREFIX xsd:   <http://w3.org/2001/XMLSchema#> "
+                + "DELETE { attacks:" + attack.getAttack() + " ?x ?y .} "
+                + "INSERT  {"
+                + "    attacks:" + attack.getAttack() + " a attacks:Attack;" +
+                "	   attacks:availability \"" + attack.getAvailability() + "\"^^xsd:string;" +
+                "	   attacks:confidentiality \"" + attack.getConfidentiality() + "\"^^xsd:string;" +
+                "	   attacks:confidentiality_access_control_authorization \"" + attack.getConfidentiality_access_control_authorization() + "\"^^xsd:string;" +
+                "	   attacks:likelihood_of_attack \"" + attack.getLikelihood_of_attack() + "\"^^xsd:string;" +
+                "	   attacks:mitigations \"asd\"^^xsd:string;" +
+                "	   attacks:name \"asd\"^^xsd:string;" +
+                "	   attacks:prerequisites \"" + attack.getPrerequisites() + "\"^^xsd:string;" +
+                "	   attacks:typical_severity \"" + attack.getTypical_severity() + "\"^^xsd:string;" +
+                "}"
+                + "WHERE {"
+                + "    attacks:" + attack.getAttack() + " ?x ?y ."
+                + "}";
+        System.out.println(insertString);
+        UpdateRequest updateRequest = UpdateFactory.create(insertString);
+        UpdateProcessor updateProcessor = UpdateExecutionFactory.createRemote(updateRequest, UPDATE_URL);
+        updateProcessor.execute();
+        return  attack;
     }
 }
