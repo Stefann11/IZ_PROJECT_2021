@@ -22,7 +22,7 @@ public class BayesController {
 
     @CrossOrigin(origins = "*")
     @GetMapping()
-    public ResponseEntity<List<BayesResultDTO>> getAppointment(@RequestParam Integer country,
+    public ResponseEntity<List<BayesResultDTO>> getBayes(@RequestParam Integer country,
                                                                @RequestParam Integer industry,
                                                                @RequestParam(name = "number-of-employees") Integer numberOfEmployees,
                                                                @RequestParam Integer os,
