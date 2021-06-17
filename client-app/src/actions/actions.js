@@ -9,6 +9,10 @@ import {
   CREATE_ATTACK_ERROR,
   GET_ATTACKS,
   GET_ATTACKS_ERROR,
+  DELETE_ATTACK,
+  DELETE_ATTACK_ERROR,
+  EDIT_ATTACK,
+  EDIT_ATTACK_ERROR,
 } from "../types/types";
 import axios from "axios";
 
@@ -135,6 +139,50 @@ export const getAttacks = () => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: GET_ATTACKS_ERROR,
+      payload: console.log(e),
+    });
+  }
+};
+
+export const deleteAttack = (attack) => async (dispatch) => {
+  debugger;
+  try {
+    const response = await axios.delete(
+      "http://localhost:8081/api/rdf",
+      {
+        data: attack,
+      },
+      {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      }
+    );
+    debugger;
+    dispatch({
+      type: DELETE_ATTACK,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({
+      type: DELETE_ATTACK_ERROR,
+      payload: console.log(e),
+    });
+  }
+};
+
+export const editAttack = (attack) => async (dispatch) => {
+  debugger;
+  try {
+    const response = await axios.put("http://localhost:8081/api/rdf", attack, {
+      headers: { "Access-Control-Allow-Origin": "*" },
+    });
+    debugger;
+    dispatch({
+      type: EDIT_ATTACK,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({
+      type: EDIT_ATTACK_ERROR,
       payload: console.log(e),
     });
   }

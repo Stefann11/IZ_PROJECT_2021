@@ -37,4 +37,11 @@ public class RDFController {
     {
         return new ResponseEntity<RDFAttackDTO>(rdfService.update(dto), HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "*")
+    @DeleteMapping()
+    public ResponseEntity<RDFAttackDTO> delete(@RequestBody RDFAttackDTO dto)
+    {
+        return new ResponseEntity<RDFAttackDTO>(rdfService.delete(dto), HttpStatus.OK);
+    }
 }

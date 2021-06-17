@@ -5,11 +5,15 @@ import { Card } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import CreateNewAttackModal from "./CreateNewAttackModal";
-import { getAttacks } from "../actions/actions";
+import { getAttacks, deleteAttack } from "../actions/actions";
+import EditAttackModal from "./EditAttackModal";
+import StateManager from "react-select";
 
 class Attacks extends Component {
   state = {
     showPostModal: false,
+    showEditModal: false,
+    attackToEdit: {},
   };
 
   async componentDidMount() {
@@ -28,6 +32,13 @@ class Attacks extends Component {
           <CreateNewAttackModal
             show={this.state.showPostModal}
             onShowChange={this.displayModalPost.bind(this)}
+          />
+        ) : null}
+        {this.state.showEditModal ? (
+          <EditAttackModal
+            show={this.state.showEditModal}
+            attack={this.state.attackToEdit}
+            onShowChange={this.displayModalEdit.bind(this)}
           />
         ) : null}
         <h3 className="mt-4" style={{ textAlign: "center" }}>
@@ -53,91 +64,75 @@ class Attacks extends Component {
                 boxShadow: "0 8px 6px -6px #999",
               }}
             >
-              <Table className="table allPrescriptions mb-0" striped>
-                <thead>
-                  <tr>
-                    <th style={{ textAlign: "center" }}>Name</th>
-                    <th style={{ textAlign: "center" }}>
-                      Likelihood of attack
-                    </th>
-                    <th style={{ textAlign: "center" }}>Typical severity</th>
-                    <th style={{ textAlign: "center" }}>Prerequisites</th>
-                    <th style={{ textAlign: "center" }}>Availability</th>
-                    <th style={{ textAlign: "center" }}>Confidentiality</th>
-                    <th style={{ textAlign: "center" }}>
-                      Confidentiality access control authorization
-                    </th>
-                    <th style={{ textAlign: "center" }}>Mitigations</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.props.attacks.map((f) => (
+              <div
+                style={{
+                  maxHeight: "1600px",
+                  overflowY: "auto",
+                }}
+              >
+                <Table className="table allPrescriptions mb-0" striped>
+                  <thead>
                     <tr>
-                      <td
-                        className="pl-4 pt-4 pb-4"
-                        style={{ textAlign: "center" }}
-                      >
-                        {f.attack}
-                      </td>
-                      <td
-                        className="pl-4 pt-4 pb-4"
-                        style={{ textAlign: "center" }}
-                      >
-                        {f.likelihood_of_attack}
-                      </td>
-                      <td
-                        className="pl-4 pt-4 pb-4"
-                        style={{ textAlign: "center" }}
-                      >
-                        {f.typical_severity}
-                      </td>
-                      <td
-                        className="pl-4 pt-4 pb-4"
-                        style={{ textAlign: "center" }}
-                      >
-                        {f.prerequisites}
-                      </td>
-                      <td
-                        className="pl-4 pt-4 pb-4"
-                        style={{ textAlign: "center" }}
-                      >
-                        {f.availability}
-                      </td>
-                      <td
-                        className="pl-4 pt-4 pb-4"
-                        style={{ textAlign: "center" }}
-                      >
-                        {f.confidentiality}
-                      </td>
-                      <td
-                        className="pl-4 pt-4 pb-4"
-                        style={{ textAlign: "center" }}
-                      >
-                        {f.confidentiality_access_control_authorization}
-                      </td>
-                      <td
-                        className="pl-4 pt-4 pb-4"
-                        style={{ textAlign: "center" }}
-                      >
-                        {f.mitigations}
-                      </td>
-                      <td
-                        className="pl-4 pt-4 pb-4"
-                        style={{ textAlign: "center" }}
-                      >
-                        <button
-                          className="btn btn-primary mb-2"
-                          onClick={() => {
-                            this.edit(f);
-                          }}
-                        >
-                          Edit
-                        </button>
-                      </td>
+                      <th style={{ textAlign: "center" }}>Name</th>
+                      <th style={{ textAlign: "center" }}>
+                        Likelihood of attack
+                      </th>
+                      <th style={{ textAlign: "center" }}>Typical severity</th>
+                      <th style={{ textAlign: "center" }}>Prerequisites</th>
+                      <th style={{ textAlign: "center" }}>Availability</th>
+                      <th style={{ textAlign: "center" }}>Confidentiality</th>
+                      <th style={{ textAlign: "center" }}>
+                        Confidentiality access control authorization
+                      </th>
+                      <th style={{ textAlign: "center" }}>Mitigations</th>
+                      <th style={{ textAlign: "center" }}>Edit</th>
+                      <th style={{ textAlign: "center" }}>Delete</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {this.props.attacks.map((f) => (
+                      <tr>
+                        <td style={{ textAlign: "center" }}>{f.attack}</td>
+                        <td style={{ textAlign: "center" }}>
+                          {f.likelihood_of_attack}
+                        </td>
+                        <td style={{ textAlign: "center" }}>
+                          {f.typical_severity}
+                        </td>
+                        <td style={{ textAlign: "center" }}>
+                          {f.prerequisites}
+                        </td>
+                        <td style={{ textAlign: "center" }}>
+                          {f.availability}
+                        </td>
+                        <td style={{ textAlign: "center" }}>
+                          {f.confidentiality}
+                        </td>
+                        <td style={{ textAlign: "center" }}>
+                          {f.confidentiality_access_control_authorization}
+                        </td>
+                        <td style={{ textAlign: "center" }}>{f.mitigations}</td>
+                        <td style={{ textAlign: "center" }}>
+                          <img
+                            onClick={() => {
+                              this.edit(f);
+                            }}
+                            src="/images/edit.png"
+                          />
+                        </td>
+                        <td style={{ textAlign: "center" }}>
+                          <img
+                            onClick={() => {
+                              this.delete(f);
+                            }}
+                            src="/images/trash.png"
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </div>
             </Card>
           </div>
         </div>
@@ -145,11 +140,28 @@ class Attacks extends Component {
     );
   }
 
-  edit() {}
+  edit(attack) {
+    this.setState({
+      attackToEdit: attack,
+    });
+    this.displayModalEdit();
+  }
+
+  async delete(attack) {
+    debugger;
+    await this.props.deleteAttack(attack);
+    window.location = "/";
+  }
 
   displayModalPost() {
     this.setState({
       showPostModal: !this.state.showPostModal,
+    });
+  }
+
+  displayModalEdit() {
+    this.setState({
+      showEditModal: !this.state.showEditModal,
     });
   }
 }
@@ -160,5 +172,5 @@ const mapStateToProps = (state) => ({
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, { getAttacks })
+  connect(mapStateToProps, { getAttacks, deleteAttack })
 )(Attacks);

@@ -13,11 +13,15 @@ class NavigationBar extends Component {
           <NavLink
             exact
             to="/"
+            activeStyle={{
+              fontWeight: "bold",
+              color: "red",
+            }}
             onClick={() => {
               window.location = "/";
             }}
           >
-            <button className="btn btn-primary btn-block">Attacks</button>
+            Attacks
           </NavLink>
           <span style={{ width: 25, display: "inline-block" }}></span>
           <NavLink

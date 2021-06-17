@@ -3,11 +3,11 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Multiselect } from "multiselect-react-dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { connect } from "react-redux";
-import { createAttack } from "../actions/actions";
+import { editAttack } from "../actions/actions";
 
-class CreateNewAttackModal extends Component {
+class EditAttackModal extends Component {
   state = {
-    showPostModal: this.props.show,
+    showEditModal: this.props.show,
     name: "",
     likelihoodOfAttack: "",
     typicalSeverity: "",
@@ -22,10 +22,12 @@ class CreateNewAttackModal extends Component {
         label: "Use input validation for cookies",
       },
       {
-        value:
-          "generate_and_validate_MAC_for_cookies, use_ssl/tls_to_protect_cookie_in_transit",
-        label:
-          "Generate and validate MAC for cookies, use ssl/tls to protect cookie in transit",
+        value: "generate_and_validate_MAC_for_cookies",
+        label: "Generate and validate MAC for cookies",
+      },
+      {
+        value: "use_ssl/tls_to_protect_cookie_in_transit",
+        label: "Use ssl/tls to protect cookie in transit",
       },
       {
         value: "web_server_implements_all_relevant_security_patches",
@@ -410,6 +412,95 @@ class CreateNewAttackModal extends Component {
       },
     ],
   };
+  async componentDidMount() {
+    const prerequisites = this.props.attack.prerequisites.split(",");
+    var selectedPrerequisites = [];
+    var i;
+    for (i = 0; i < prerequisites.length; i++) {
+      if (prerequisites[i].charAt(0) === " ") {
+        prerequisites[i] = prerequisites[i].substring(
+          1,
+          prerequisites[i].length
+        );
+      }
+      const test = this.state.optionsPrerequisites.filter((obj) => {
+        return obj.value === prerequisites[i];
+      });
+      selectedPrerequisites.push(test[0]);
+    }
+
+    const confidentialityAccessControlAuthorization =
+      this.props.attack.confidentiality_access_control_authorization.split(",");
+    var selectedConfidentialityAccessControlAuthorization = [];
+    for (i = 0; i < confidentialityAccessControlAuthorization.length; i++) {
+      if (confidentialityAccessControlAuthorization[i].charAt(0) === " ") {
+        confidentialityAccessControlAuthorization[i] =
+          confidentialityAccessControlAuthorization[i].substring(
+            1,
+            confidentialityAccessControlAuthorization[i].length
+          );
+      }
+      const test =
+        this.state.optionsConfidentialityAccessControlAuthorization.filter(
+          (obj) => {
+            return obj.value === confidentialityAccessControlAuthorization[i];
+          }
+        );
+      selectedConfidentialityAccessControlAuthorization.push(test[0]);
+    }
+
+    const availability = this.props.attack.availability.split(",");
+    var selectedAvailability = [];
+    for (i = 0; i < availability.length; i++) {
+      if (availability[i].charAt(0) === " ") {
+        availability[i] = availability[i].substring(1, availability[i].length);
+      }
+      const test = this.state.optionsAvailability.filter((obj) => {
+        return obj.value === availability[i];
+      });
+      selectedAvailability.push(test[0]);
+    }
+
+    const confidentiality = this.props.attack.confidentiality.split(",");
+    var selectedConfidentiality = [];
+    for (i = 0; i < confidentiality.length; i++) {
+      if (confidentiality[i].charAt(0) === " ") {
+        confidentiality[i] = confidentiality[i].substring(
+          1,
+          confidentiality[i].length
+        );
+      }
+      const test = this.state.optionsConfidentiality.filter((obj) => {
+        return obj.value === confidentiality[i];
+      });
+      selectedConfidentiality.push(test[0]);
+    }
+
+    const mitigations = this.props.attack.mitigations.split(",");
+    var selectedMitigations = [];
+    for (i = 0; i < mitigations.length; i++) {
+      if (mitigations[i].charAt(0) === " ") {
+        mitigations[i] = mitigations[i].substring(1, mitigations[i].length);
+      }
+      const test = this.state.optionsMitigations.filter((obj) => {
+        return obj.value === mitigations[i];
+      });
+      selectedMitigations.push(test[0]);
+    }
+
+    this.setState({
+      name: this.props.attack.name,
+      likelihoodOfAttack: this.props.attack.likelihood_of_attack,
+      typicalSeverity: this.props.attack.typical_severity,
+      selectedPrerequisites: selectedPrerequisites,
+      selectedAvailability: selectedAvailability,
+      selectedConfidentiality: selectedConfidentiality,
+      selectedConfidentialityAccessControlAuthorization:
+        selectedConfidentialityAccessControlAuthorization,
+      selectedMitigations: selectedMitigations,
+    });
+    debugger;
+  }
 
   render() {
     return (
@@ -418,12 +509,10 @@ class CreateNewAttackModal extends Component {
           maxWidth: "750px",
           width: "749px",
         }}
-        isOpen={this.state.showPostModal}
+        isOpen={this.state.showEditModal}
         centered={true}
       >
-        <ModalHeader toggle={this.toggle.bind(this)}>
-          Create new attack
-        </ModalHeader>
+        <ModalHeader toggle={this.toggle.bind(this)}>Edit attack</ModalHeader>
         <ModalBody>
           <div className="mt-3">
             <label for="firstName">Name Of Attack:</label>
@@ -533,7 +622,7 @@ class CreateNewAttackModal extends Component {
                 this.create();
               }}
             >
-              Create
+              Edit
             </button>
           </div>
         </ModalBody>
@@ -594,8 +683,8 @@ class CreateNewAttackModal extends Component {
       typical_severity: this.state.typicalSeverity,
     };
     debugger;
-    await this.props.createAttack(parameters);
-    this.toggle();
+    await this.props.editAttack(parameters);
+    window.location = "/";
   }
 
   onSelectMitigations = (selectedList, selectedItem) => {
@@ -672,11 +761,11 @@ class CreateNewAttackModal extends Component {
 
   toggle() {
     debugger;
-    this.setState({ showPostModal: false });
+    this.setState({ showEditModal: false });
     this.props.onShowChange();
   }
 }
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { createAttack })(CreateNewAttackModal);
+export default connect(mapStateToProps, { editAttack })(EditAttackModal);

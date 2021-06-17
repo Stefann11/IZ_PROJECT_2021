@@ -8,3 +8,7 @@ export const CREATE_ATTACK = "createAttack";
 export const CREATE_ATTACK_ERROR = "createAttackError";
 export const GET_ATTACKS = "getAttacks";
 export const GET_ATTACKS_ERROR = "getAttacksError";
+export const DELETE_ATTACK = "deleteAttack";
+export const DELETE_ATTACK_ERROR = "deleteAttackError";
+export const EDIT_ATTACK = "editAttack";
+export const EDIT_ATTACK_ERROR = "editAttackError";

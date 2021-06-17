@@ -4,6 +4,8 @@ import {
   GET_SEVERITY_SCORE,
   CREATE_ATTACK,
   GET_ATTACKS,
+  DELETE_ATTACK,
+  EDIT_ATTACK,
 } from "../types/types";
 
 const initialState = {
@@ -39,6 +41,14 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         attacks: action.payload,
+      };
+    case DELETE_ATTACK:
+      return {
+        ...state,
+      };
+    case EDIT_ATTACK:
+      return {
+        ...state,
       };
     default:
       return state;
