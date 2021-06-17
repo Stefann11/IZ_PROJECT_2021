@@ -5,17 +5,22 @@ import { Card } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import CreateNewAttackModal from "./CreateNewAttackModal";
+import { getAttacks } from "../actions/actions";
 
 class Attacks extends Component {
   state = {
     showPostModal: false,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     debugger;
+    await this.props.getAttacks();
   }
 
   render() {
+    if (this.props.attacks === undefined) {
+      return null;
+    }
     debugger;
     return (
       <div>
@@ -66,23 +71,71 @@ class Attacks extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Accessing intercepting modifyingHTTPCookies</td>
-                    <td>High</td>
-                    <td>High</td>
-                    <td>
-                      Relies on cookies, cookie contains sensitive information,
-                      response contains cookie
-                    </td>
-                    <td>None</td>
-                    <td>Read data</td>
-                    <td>Gain privileges</td>
-                    <td>
-                      Use input validation for cookies, generate and validate
-                      MAC for cookies, use ssl/tls to protect cookie in transit,
-                      web server implements all relevant security patches
-                    </td>
-                  </tr>
+                  {this.props.attacks.map((f) => (
+                    <tr>
+                      <td
+                        className="pl-4 pt-4 pb-4"
+                        style={{ textAlign: "center" }}
+                      >
+                        {f.attack}
+                      </td>
+                      <td
+                        className="pl-4 pt-4 pb-4"
+                        style={{ textAlign: "center" }}
+                      >
+                        {f.likelihood_of_attack}
+                      </td>
+                      <td
+                        className="pl-4 pt-4 pb-4"
+                        style={{ textAlign: "center" }}
+                      >
+                        {f.typical_severity}
+                      </td>
+                      <td
+                        className="pl-4 pt-4 pb-4"
+                        style={{ textAlign: "center" }}
+                      >
+                        {f.prerequisites}
+                      </td>
+                      <td
+                        className="pl-4 pt-4 pb-4"
+                        style={{ textAlign: "center" }}
+                      >
+                        {f.availability}
+                      </td>
+                      <td
+                        className="pl-4 pt-4 pb-4"
+                        style={{ textAlign: "center" }}
+                      >
+                        {f.confidentiality}
+                      </td>
+                      <td
+                        className="pl-4 pt-4 pb-4"
+                        style={{ textAlign: "center" }}
+                      >
+                        {f.confidentiality_access_control_authorization}
+                      </td>
+                      <td
+                        className="pl-4 pt-4 pb-4"
+                        style={{ textAlign: "center" }}
+                      >
+                        {f.mitigations}
+                      </td>
+                      <td
+                        className="pl-4 pt-4 pb-4"
+                        style={{ textAlign: "center" }}
+                      >
+                        <button
+                          className="btn btn-primary mb-2"
+                          onClick={() => {
+                            this.edit(f);
+                          }}
+                        >
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </Card>
@@ -92,6 +145,8 @@ class Attacks extends Component {
     );
   }
 
+  edit() {}
+
   displayModalPost() {
     this.setState({
       showPostModal: !this.state.showPostModal,
@@ -99,6 +154,11 @@ class Attacks extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  attacks: state.attacks,
+});
 
-export default compose(withRouter, connect(mapStateToProps, {}))(Attacks);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, { getAttacks })
+)(Attacks);
