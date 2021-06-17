@@ -19,7 +19,7 @@ public class CBRAttacksController {
 
     @CrossOrigin(origins = "*")
     @GetMapping()
-    public ResponseEntity<List<CBRResultDTO>> getAppointment(@RequestParam(name = "likelihood-of-attack") String likelihoodOfAttack,
+    public ResponseEntity<List<CBRResultDTO>> getCBR(@RequestParam(name = "likelihood-of-attack") String likelihoodOfAttack,
                                                             @RequestParam(name = "typical-severity") String typicalSeverity,
                                                             @RequestParam String prerequisites,
                                                             @RequestParam String availability,

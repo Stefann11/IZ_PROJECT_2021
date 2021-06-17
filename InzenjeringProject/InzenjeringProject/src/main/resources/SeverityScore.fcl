@@ -1,0 +1,158 @@
+FUNCTION_BLOCK attacks
+
+VAR_INPUT               // ulazne varijable
+	attack_vector : REAL;
+    attack_complexity : REAL;
+    privileges_required : REAL;
+	user_interaction : REAL;
+	scope : REAL;
+	confidentiality : REAL;
+	integrity : REAL;
+	availability : REAL;
+	exploit_code_maturity : REAL;
+	remediation_level : REAL;
+	report_confidence : REAL;
+END_VAR
+
+VAR_OUTPUT              // izlazne varijable
+	severity_score : REAL;
+END_VAR
+
+FUZZIFY attack_vector
+	TERM network := (0.62, 0) (0.85, 1) (1, 0);
+	TERM adjacent := (0.55, 0) (0.62, 1) (0.85, 0);
+    TERM local := (0.2, 0) (0.55, 1) (0.62, 0);
+    TERM physical := (0.0, 0) (0.2, 1) (0.55, 0);
+END_FUZZIFY
+
+FUZZIFY attack_complexity
+	TERM high := (0, 0) (0.44, 1) (0.77, 0);
+	TERM low := (0.44, 0) (0.77, 1) (1, 0);
+END_FUZZIFY
+
+FUZZIFY privileges_required
+	TERM high := (0, 0) (0.27, 1) (0.62, 0);
+	TERM low := (0.27, 0) (0.62, 1) (0.85, 0);
+	TERM none := (0.62, 0) (0.85, 1) (1, 0);
+END_FUZZIFY
+
+FUZZIFY user_interaction
+	TERM none := (0.62, 0) (0.85, 1) (1, 0);
+	TERM required := (0, 0) (0.62, 1) (0.85, 0);
+END_FUZZIFY
+
+FUZZIFY scope
+	TERM unchanged := (0, 0) (0.5, 1) (1, 0);
+	TERM changed := (0.5, 0) (1, 1);
+END_FUZZIFY
+
+FUZZIFY confidentiality
+	TERM none := (0, 1) (0.22, 0);
+	TERM low := (0, 0) (0.22, 1) (0.56, 0);
+	TERM high := (0.22, 0) (0.56, 1) (1, 0);
+END_FUZZIFY
+
+FUZZIFY integrity
+	TERM none := (0, 1) (0.22, 0);
+	TERM low := (0, 0) (0.22, 1) (0.56, 0);
+	TERM high := (0.22, 0) (0.56, 1) (1, 0);
+END_FUZZIFY
+
+FUZZIFY availability
+	TERM none := (0, 1) (0.22, 0);
+	TERM low := (0, 0) (0.22, 1) (0.56, 0);
+	TERM high := (0.22, 0) (0.56, 1) (1, 0);
+END_FUZZIFY
+
+FUZZIFY exploit_code_maturity
+	TERM not_defined := (0.99, 0) (1, 1);
+	TERM high := (0.97, 0) (0.99, 1) (1, 0);
+	TERM functional := (0.94, 0) (0.97, 1) (0.99, 0);
+    TERM proof_of_concept := (0.91, 0) (0.94, 1) (0.97, 0);
+    TERM unproven := (0, 0) (0.91, 1) (0.94, 0);
+END_FUZZIFY
+
+FUZZIFY remediation_level
+	TERM not_defined := (0.99, 0) (1, 1);
+	TERM unavailable := (0.97, 0) (0.99, 1) (1, 0);
+	TERM workaround := (0.96, 0) (0.97, 1) (0.99, 0);
+    TERM temporary_fix := (0.95, 0) (0.96, 1) (0.97, 0);
+    TERM official_fix := (0, 0) (0.95, 1) (0.96, 0);
+END_FUZZIFY
+
+FUZZIFY report_confidence
+	TERM not_defined := (0.99, 0) (1, 1);
+	TERM confirmed := (0.97, 0) (0.99, 1) (1, 0);
+	TERM reasonable := (0.92, 0) (0.96, 1) (0.99, 0);
+    TERM unknown := (0, 0) (0.92, 1) (0.96, 0);
+END_FUZZIFY
+
+DEFUZZIFY severity_score
+	TERM none := (0, 1) (0.1, 0);
+    TERM low := (0.1, 0) (2, 1) (4, 0);
+    TERM medium := (4, 0) (5.5, 1) (7, 0);
+    TERM high := (7, 0) (8, 1) (9, 0);
+    TERM critical := (9, 0) (10, 1);
+	METHOD : COG;		// 'Center Of Gravity' odn. centar mase (koristi se i MM odn. mean max)
+	DEFAULT := 0;		// podrazumevana vrednost (ukoliko nijedno pravilo nije aktivirano)
+END_DEFUZZIFY
+
+RULEBLOCK blok1
+	AND : MIN;			// za konjunkciju se koristi minimum (samim tim sa za disjunkciju koristi maksimum)
+	ACT : MIN;			// za zaključivanje (implikaciju) je izabran minimum (Mamdani implikacija) (osim MIN koristi se i PROD)
+	ACCU : MAX;			// za kompoziciju je izabran maksimum (osim MAX koristi se i SUM)
+
+	RULE 1 : IF attack_vector IS physical THEN severity_score IS low;
+	RULE 2 : IF attack_vector IS local THEN severity_score IS high;
+    RULE 3 : IF attack_vector IS adjacent THEN severity_score IS high;
+    RULE 4 : IF attack_vector IS network THEN severity_score IS critical;
+    RULE 5 : IF attack_complexity IS low THEN severity_score IS high;
+    RULE 6 : IF attack_complexity IS high THEN severity_score IS low;
+    RULE 7 : IF privileges_required IS none THEN severity_score IS high;
+    RULE 8 : IF privileges_required IS low THEN severity_score IS medium;
+    RULE 9 : IF privileges_required IS high THEN severity_score IS low;
+    RULE 10 : IF user_interaction IS none THEN severity_score IS high;
+    RULE 11 : IF user_interaction IS required THEN severity_score IS medium;
+    RULE 12 : IF scope IS unchanged THEN severity_score IS high;
+    RULE 13 : IF scope IS changed THEN severity_score IS critical;
+    RULE 14 : IF confidentiality IS none THEN severity_score IS none;
+    RULE 15 : IF confidentiality IS low THEN severity_score IS medium;
+    RULE 16 : IF confidentiality IS high THEN severity_score IS critical;
+    RULE 17 : IF integrity IS none THEN severity_score IS none;
+    RULE 18 : IF integrity IS low THEN severity_score IS medium;
+    RULE 19 : IF integrity IS high THEN severity_score IS critical;
+    RULE 20 : IF availability IS none THEN severity_score IS none;
+    RULE 21 : IF availability IS low THEN severity_score IS medium;
+    RULE 22 : IF availability IS high THEN severity_score IS critical;
+	RULE 23 : IF exploit_code_maturity IS not_defined THEN severity_score IS high;
+    RULE 24 : IF exploit_code_maturity IS unproven THEN severity_score IS low;
+    RULE 25 : IF exploit_code_maturity IS proof_of_concept THEN severity_score IS medium;
+    RULE 26 : IF exploit_code_maturity IS functional THEN severity_score IS medium;
+    RULE 27 : IF exploit_code_maturity IS high THEN severity_score IS high;
+	RULE 28 : IF remediation_level IS not_defined THEN severity_score IS high;
+    RULE 29 : IF remediation_level IS official_fix THEN severity_score IS low;
+    RULE 30 : IF remediation_level IS temporary_fix THEN severity_score IS medium;
+    RULE 31 : IF remediation_level IS workaround THEN severity_score IS medium;
+    RULE 32 : IF remediation_level IS unavailable THEN severity_score IS high;
+	RULE 33 : IF report_confidence IS not_defined THEN severity_score IS high;
+    RULE 34 : IF report_confidence IS unknown THEN severity_score IS low;
+    RULE 35 : IF report_confidence IS reasonable THEN severity_score IS medium;
+    RULE 36 : IF report_confidence IS confirmed THEN severity_score IS high;
+	RULE 37 : IF confidentiality IS none AND integrity IS none AND availability IS none THEN severity_score IS none;
+	RULE 38 : IF attack_vector IS physical AND confidentiality IS high THEN severity_score IS medium;
+	RULE 39 : IF attack_vector IS physical AND integrity IS high THEN severity_score IS medium;
+	RULE 40 : IF attack_vector IS physical AND availability IS high THEN severity_score IS medium;
+	RULE 41 : IF attack_vector IS physical AND integrity IS low THEN severity_score IS low;
+	RULE 42 : IF attack_vector IS network AND attack_complexity IS high AND integrity IS low THEN severity_score IS low;
+	RULE 43 : IF attack_vector IS local AND user_interaction IS required AND confidentiality IS high AND integrity IS high THEN severity_score IS high;
+	RULE 44 : IF attack_vector IS network AND user_interaction IS required AND confidentiality IS high AND scope IS changed AND integrity IS high AND availability IS high AND attack_complexity IS low AND privileges_required IS none THEN severity_score IS critical;
+	RULE 45 : IF attack_vector IS network AND user_interaction IS required AND confidentiality IS high AND scope IS changed AND integrity IS high AND availability IS high AND attack_complexity IS high AND privileges_required IS high THEN severity_score IS high;
+	RULE 46 : IF attack_vector IS network AND user_interaction IS required AND confidentiality IS none AND scope IS changed AND integrity IS none AND availability IS high AND attack_complexity IS high AND privileges_required IS high THEN severity_score IS medium;
+	RULE 47 : IF attack_vector IS network AND user_interaction IS required AND confidentiality IS none AND scope IS changed AND integrity IS none AND availability IS low AND attack_complexity IS high AND privileges_required IS high THEN severity_score IS low;
+	RULE 48 : IF attack_vector IS network AND user_interaction IS required AND confidentiality IS low AND scope IS changed AND integrity IS none AND availability IS high AND attack_complexity IS high AND privileges_required IS high THEN severity_score IS medium;
+	RULE 49 : IF attack_vector IS physical AND user_interaction IS required AND confidentiality IS none AND scope IS unchanged AND integrity IS none AND availability IS high AND attack_complexity IS high AND privileges_required IS high THEN severity_score IS low;
+	RULE 50 : IF attack_vector IS adjacent AND user_interaction IS required AND confidentiality IS high AND scope IS unchanged AND integrity IS low AND availability IS high AND attack_complexity IS high AND privileges_required IS high THEN severity_score IS medium;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

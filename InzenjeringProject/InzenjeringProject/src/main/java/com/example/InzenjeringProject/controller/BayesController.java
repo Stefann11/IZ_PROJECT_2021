@@ -22,7 +22,7 @@ public class BayesController {
 
     @CrossOrigin(origins = "*")
     @GetMapping()
-    public ResponseEntity<List<BayesResultDTO>> getAppointment(@RequestParam Integer country,
+    public ResponseEntity<List<BayesResultDTO>> getBayes(@RequestParam Integer country,
                                                                @RequestParam Integer industry,
                                                                @RequestParam(name = "number-of-employees") Integer numberOfEmployees,
                                                                @RequestParam Integer os,
@@ -38,7 +38,7 @@ public class BayesController {
             result = bayesNetwork.run(country, industry, numberOfEmployees, os,
                     typeOfDataLost, securityControl, itDepartment, systemAge, internationalCompany, staticIp);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
 

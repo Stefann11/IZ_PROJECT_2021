@@ -2,26 +2,32 @@ package com.example.InzenjeringProject.connector;
 
 import com.example.InzenjeringProject.model.AttackDescription;
 import com.example.InzenjeringProject.model.Scale;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.util.ResourceUtils;
 import ucm.gaia.jcolibri.cbrcore.CBRCase;
 import ucm.gaia.jcolibri.cbrcore.CaseBaseFilter;
 import ucm.gaia.jcolibri.cbrcore.Connector;
 import ucm.gaia.jcolibri.exception.InitializingException;
 import ucm.gaia.jcolibri.util.FileIO;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.util.Collection;
 import java.util.LinkedList;
+
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 public class CsvConnector implements Connector {
 	
 	@Override
 	public Collection<CBRCase> retrieveAllCases() {
 		LinkedList<CBRCase> cases = new LinkedList<CBRCase>();
-		
+
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(FileIO.openFile("C:\\Inzenjering Znanja Projekat\\IZ_PROJECT_2021\\InzenjeringProject\\InzenjeringProject\\data\\attacks.csv")));
+			File file = ResourceUtils.getFile("classpath:attacks.csv");
+			BufferedReader br = new BufferedReader(new InputStreamReader(FileIO.openFile(file.getAbsolutePath())));
 			if (br == null)
 				throw new Exception("Error opening file");
 
