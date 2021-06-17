@@ -9,7 +9,7 @@ class NavigationBar extends Component {
   render() {
     const NavBar = () => {
       return (
-        <React.Fragment>
+        <React.Fragment w-100>
           <NavLink
             exact
             to="/"
