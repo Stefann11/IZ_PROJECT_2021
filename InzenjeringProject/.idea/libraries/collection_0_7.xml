@@ -1,0 +1,48 @@
+<component name="libraryTable">
+  <library name="collection-0.7">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/collection-0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/commons-logging-1.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jsonld-java-0.12.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/log4j-api-2.11.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-rdfconnection-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jpf-1.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/libthrift-0.12.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/httpclient-cache-4.5.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/slf4j-log4j12-1.7.26.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jFuzzyLogic.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/commons-csv-1.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jCOLIBRI-3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-iri-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jackson-core-2.9.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-dboe-index-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/commons-lang3-3.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-dboe-transaction-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/commons-io-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-arq-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/httpclient-4.5.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-tdb-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-core-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-shaded-guava-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/httpcore-4.4.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-dboe-trans-data-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/commons-codec-1.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-dboe-base-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jackson-annotations-2.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-cmds-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/unbbayes-4.22.18.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/slf4j-api-1.7.26.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jackson-databind-2.9.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-base-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/commons-compress-1.18.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jena-tdb2-3.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jcl-over-slf4j-1.7.26.jar!/" />
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/commons-cli-1.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/InzenjeringProject/lib/jFuzzyLogic.jar!/" />
+    </SOURCES>
+  </library>
+</component>
