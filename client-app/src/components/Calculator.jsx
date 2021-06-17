@@ -25,7 +25,9 @@ class Calculator extends Component {
     debugger;
     return (
       <React.Fragment>
-        <h3 className="mt-4">Severity score</h3>
+        <h3 className="mt-4" style={{ textAlign: "center" }}>
+          Severity score
+        </h3>
         <hr />
         <div className="mt-5">
           <div className="d-inline-flex w-50">

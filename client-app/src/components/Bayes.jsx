@@ -33,7 +33,9 @@ class Bayes extends Component {
             onShowChange={this.displayModalPost.bind(this)}
           />
         ) : null}
-        <h3 className="mt-4">Choose characteristics</h3>
+        <h3 className="mt-4" style={{ textAlign: "center" }}>
+          Choose characteristics
+        </h3>
         <hr />
         <div className="mt-5">
           <div className="d-inline-flex w-50">

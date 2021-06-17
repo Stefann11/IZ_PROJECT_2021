@@ -4,9 +4,12 @@ import { Table } from "reactstrap";
 import { Card } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
+import CreateNewAttackModal from "./CreateNewAttackModal";
 
 class Attacks extends Component {
-  state = {};
+  state = {
+    showPostModal: false,
+  };
 
   componentDidMount() {
     debugger;
@@ -16,7 +19,27 @@ class Attacks extends Component {
     debugger;
     return (
       <div>
+        {this.state.showPostModal ? (
+          <CreateNewAttackModal
+            show={this.state.showPostModal}
+            onShowChange={this.displayModalPost.bind(this)}
+          />
+        ) : null}
+        <h3 className="mt-4" style={{ textAlign: "center" }}>
+          Attacks
+        </h3>
+        <hr />
         <div className="wrap bg-white pt-3 pb-3" style={{ height: "100vh" }}>
+          <div style={{ textAlign: "right" }}>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.displayModalPost();
+              }}
+            >
+              Create new attack
+            </button>
+          </div>
           <div style={{ marginTop: "40px" }} id="appointmentTable">
             <Card
               className="mt-5"
@@ -35,7 +58,7 @@ class Attacks extends Component {
                     <th style={{ textAlign: "center" }}>Typical severity</th>
                     <th style={{ textAlign: "center" }}>Prerequisites</th>
                     <th style={{ textAlign: "center" }}>Availability</th>
-                    <th style={{ textAlign: "center" }}>Confidentialityy</th>
+                    <th style={{ textAlign: "center" }}>Confidentiality</th>
                     <th style={{ textAlign: "center" }}>
                       Confidentiality access control authorization
                     </th>
@@ -67,6 +90,12 @@ class Attacks extends Component {
         </div>
       </div>
     );
+  }
+
+  displayModalPost() {
+    this.setState({
+      showPostModal: !this.state.showPostModal,
+    });
   }
 }
 
