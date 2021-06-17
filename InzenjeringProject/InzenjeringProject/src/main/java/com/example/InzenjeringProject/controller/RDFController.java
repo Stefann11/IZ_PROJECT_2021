@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/rdf")
 public class RDFController {
@@ -17,10 +19,15 @@ public class RDFController {
 
     @CrossOrigin(origins = "*")
     @PostMapping()
-    public ResponseEntity<Void> insert(@RequestBody RDFAttackDTO dto)
+    public ResponseEntity<RDFAttackDTO> insert(@RequestBody RDFAttackDTO dto)
     {
-        rdfService.insert(dto);
+        return new ResponseEntity<RDFAttackDTO>(rdfService.insert(dto), HttpStatus.OK);
+    }
 
-        return new ResponseEntity<Void>(HttpStatus.OK);
+    @CrossOrigin(origins = "*")
+    @GetMapping()
+    public ResponseEntity<List<RDFAttackDTO>> getAll()
+    {
+        return new ResponseEntity<List<RDFAttackDTO>>(rdfService.getAll(), HttpStatus.OK);
     }
 }
