@@ -2,7 +2,6 @@ package com.example.InzenjeringProject.fuzzy;
 
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
-import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 import net.sourceforge.jFuzzyLogic.rule.Variable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
