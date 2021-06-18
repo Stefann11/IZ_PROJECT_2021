@@ -28,8 +28,8 @@ public class RDFService {
                 "	   attacks:confidentiality \"" + attack.getConfidentiality() + "\"^^xsd:string;" +
                 "	   attacks:confidentiality_access_control_authorization \"" + attack.getConfidentiality_access_control_authorization() + "\"^^xsd:string;" +
                 "	   attacks:likelihood_of_attack \"" + attack.getLikelihood_of_attack() + "\"^^xsd:string;" +
-                "	   attacks:mitigations \"asd\"^^xsd:string;" +
-                "	   attacks:name \"asd\"^^xsd:string;" +
+                "	   attacks:mitigations \"" + attack.getMitigations() +  "\"^^xsd:string;" +
+                "	   attacks:name \"" + LocalDateTime.now() +  "\"^^xsd:string;" +
                 "	   attacks:prerequisites \"" + attack.getPrerequisites() + "\"^^xsd:string;" +
                 "	   attacks:typical_severity \"" + attack.getTypical_severity() + "\"^^xsd:string;" +
                 "}";
@@ -73,7 +73,7 @@ public class RDFService {
                 Literal name = solution.getLiteral("name");
                 Literal prerequisites = solution.getLiteral("prerequisites");
                 Literal typical_severity = solution.getLiteral("typical_severity");
-                result.add(new RDFAttackDTO(attack.getLocalName(), availability.getString(),
+                result.add(new RDFAttackDTO(attack.getURI(), availability.getString(),
                         confidentiality.getString(), confidentiality_access_control_authorization.getString(),
                         likelihood_of_attack.getString(), mitigations.getString(),
                         name.getString(), prerequisites.getString(), typical_severity.getString()));
@@ -85,17 +85,16 @@ public class RDFService {
         return  result;
     }
 
-    public RDFAttackDTO delete(RDFAttackDTO attack) {
+    public void delete(String attack) {
         String deleteString =  "PREFIX attacks: <http://www.ftn.uns.ac.rs/attacks#> "
         		+ "DELETE "
         		+ "WHERE {"
-        		+ "    attacks:" + attack.getAttack() + " ?x ?y ."
+        		+ "    attacks:" + attack + " ?x ?y ."
         		+ "}";
 		UpdateRequest updateRequest2 = UpdateFactory.create(deleteString);
         System.setProperty("http.maxConnections", "10000");
         UpdateProcessor updateProcessor2 = UpdateExecutionFactory.createRemote(updateRequest2, UPDATE_URL);
         updateProcessor2.execute();
-        return  attack;
     }
 
     public RDFAttackDTO update(RDFAttackDTO attack) {

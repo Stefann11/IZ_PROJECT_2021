@@ -45,7 +45,7 @@ class Attacks extends Component {
           Attacks
         </h3>
         <hr />
-        <div className="wrap bg-white pt-3 pb-3" style={{ height: "100vh" }}>
+        <div className="wrap bg-white pt-3">
           <div style={{ textAlign: "right" }}>
             <button
               className="btn btn-primary"
@@ -66,7 +66,7 @@ class Attacks extends Component {
             >
               <div
                 style={{
-                  maxHeight: "1600px",
+                  maxHeight: "440px",
                   overflowY: "auto",
                 }}
               >
@@ -92,7 +92,7 @@ class Attacks extends Component {
                   <tbody>
                     {this.props.attacks.map((f) => (
                       <tr>
-                        <td style={{ textAlign: "center" }}>{f.attack}</td>
+                        <td style={{ textAlign: "center" }}>{f.name}</td>
                         <td style={{ textAlign: "center" }}>
                           {f.likelihood_of_attack}
                         </td>

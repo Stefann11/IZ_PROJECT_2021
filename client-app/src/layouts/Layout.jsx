@@ -4,9 +4,11 @@ import Header from "../components/Common/Header";
 class Layout extends Component {
   render() {
     return (
-      <div className="container">
+      <div>
         <Header />
-        <div className="wrapper">{this.props.children}</div>
+        <div className="container">
+          <div className="wrapper">{this.props.children}</div>
+        </div>
       </div>
     );
   }

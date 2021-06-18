@@ -425,7 +425,7 @@ class CreateNewAttackModal extends Component {
           Create new attack
         </ModalHeader>
         <ModalBody>
-          <div className="mt-3">
+          {/* <div className="mt-3">
             <label for="firstName">Name Of Attack:</label>
             <input
               type="text"
@@ -436,7 +436,7 @@ class CreateNewAttackModal extends Component {
               id="name"
               placeholder="Enter name of attack"
             />
-          </div>
+          </div> */}
           <div className="mt-5">
             <label for="lastName">Likelihood of attack:</label>
             <select
@@ -446,7 +446,7 @@ class CreateNewAttackModal extends Component {
               name="likelihoodOfAttack"
             >
               <option value=""> </option>
-              <option value="unkown">Unkown</option>
+              <option value="unknown">Unknown</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -461,8 +461,8 @@ class CreateNewAttackModal extends Component {
               name="typicalSeverity"
             >
               <option value=""> </option>
-              <option value="unkown">Unkown</option>
-              <option value="ver_low">Very low</option>
+              <option value="unknown">Unknown</option>
+              <option value="very_low">Very low</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -515,7 +515,7 @@ class CreateNewAttackModal extends Component {
               displayValue="label" // Property name to display in the dropdown options
             />
           </div>
-          <div class="mt-5">
+          {/* <div class="mt-5">
             <label> Mitigations</label>
             <Multiselect
               options={this.state.optionsMitigations} // Options to display in the dropdown
@@ -524,7 +524,7 @@ class CreateNewAttackModal extends Component {
               onRemove={this.onRemoveMitigations} // Function will trigger on remove event
               displayValue="label" // Property name to display in the dropdown options
             />
-          </div>
+          </div> */}
 
           <div style={{ textAlign: "right" }} className="mt-5 w-100">
             <button
@@ -582,20 +582,20 @@ class CreateNewAttackModal extends Component {
     );
     mitigations = mitigations.substring(2, mitigations.length);
     const parameters = {
-      attack: this.state.name,
+      attack: "",
       availability: availability,
       confidentiality: confidentiality,
       confidentiality_access_control_authorization:
         confidentialityAccessControlAuthorization,
       likelihood_of_attack: this.state.likelihoodOfAttack,
-      mitigations: mitigations,
+      mitigations: "unknown",
       name: this.state.name,
       prerequisites: prerequisites,
       typical_severity: this.state.typicalSeverity,
     };
     debugger;
     await this.props.createAttack(parameters);
-    this.toggle();
+    window.location = "/";
   }
 
   onSelectMitigations = (selectedList, selectedItem) => {
