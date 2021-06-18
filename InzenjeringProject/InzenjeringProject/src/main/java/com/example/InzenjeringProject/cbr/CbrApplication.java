@@ -37,6 +37,7 @@ public class CbrApplication implements StandardCBRApplication {
 		
 		simConfig = new NNConfig(); // KNN configuration
 		simConfig.setDescriptionSimFunction(new Average());  // global similarity function = average
+		attacks = new ArrayList<CBRResultDTO>();
 
 		// simConfig.addMapping(new Attribute("price", TransactionDescription.class), new Interval(100));
 		simConfig.addMapping(new Attribute("likelihoodOfAttack", AttackDescription.class), new EnumDistance());

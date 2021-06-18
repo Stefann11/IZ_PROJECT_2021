@@ -148,10 +148,8 @@ export const deleteAttack = (attack) => async (dispatch) => {
   debugger;
   try {
     const response = await axios.delete(
-      "http://localhost:8081/api/rdf",
-      {
-        data: attack,
-      },
+      "http://localhost:8081/api/rdf/" +
+        attack.attack.substring(33, attack.attack.length),
       {
         headers: { "Access-Control-Allow-Origin": "*" },
       }

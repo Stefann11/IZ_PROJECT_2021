@@ -18,6 +18,10 @@ class EditAttackModal extends Component {
     selectedMitigations: [],
     optionsMitigations: [
       {
+        value: "unknown",
+        label: "Unknown",
+      },
+      {
         value: "use_input_validation_for_cookies",
         label: "Use input validation for cookies",
       },
@@ -535,7 +539,7 @@ class EditAttackModal extends Component {
               name="likelihoodOfAttack"
             >
               <option value=""> </option>
-              <option value="unkown">Unkown</option>
+              <option value="unknown">Unknown</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -550,8 +554,8 @@ class EditAttackModal extends Component {
               name="typicalSeverity"
             >
               <option value=""> </option>
-              <option value="unkown">Unkown</option>
-              <option value="ver_low">Very low</option>
+              <option value="unknown">Unknown</option>
+              <option value="very_low">Very low</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -671,7 +675,10 @@ class EditAttackModal extends Component {
     );
     mitigations = mitigations.substring(2, mitigations.length);
     const parameters = {
-      attack: this.state.name,
+      attack: this.props.attack.attack.substring(
+        33,
+        this.props.attack.attack.length
+      ),
       availability: availability,
       confidentiality: confidentiality,
       confidentiality_access_control_authorization:

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { NavItem, Nav } from "reactstrap";
+import { NavLink } from "react-router-dom";
+import "../../css/nav.css";
 
 class NavigationBar extends Component {
   state = {};
@@ -9,57 +11,51 @@ class NavigationBar extends Component {
   render() {
     const NavBar = () => {
       return (
-        <React.Fragment w-100>
-          <NavLink
-            exact
-            to="/"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "red",
-            }}
-            onClick={() => {
-              window.location = "/";
-            }}
-          >
-            Attacks
-          </NavLink>
-          <span style={{ width: 25, display: "inline-block" }}></span>
-          <NavLink
-            exact
-            to="/cbr"
-            onClick={() => {
-              window.location = "/cbr";
-            }}
-          >
-            <button className="btn btn-success btn-block">
+        <Nav
+          className="navbar navbar-light pl-5 pr-5"
+          style={{ backgroundColor: "#e3f2fd", textDecoration: "none" }}
+        >
+          <NavItem>
+            <NavLink
+              exact
+              to="/"
+              className="nav-link"
+              activeClassName="nav-link-active"
+            >
+              Attacks
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              exact
+              to="/cbr"
+              className="nav-link"
+              activeClassName="nav-link-active"
+            >
               Case Base Reasoning
-            </button>
-          </NavLink>
-          <span style={{ width: 25, display: "inline-block" }}></span>
-          <NavLink
-            exact
-            to="/bayes"
-            onClick={() => {
-              window.location = "/bayes";
-            }}
-          >
-            <button className="btn btn-warning btn-block">
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              exact
+              to="/bayes"
+              className="nav-link"
+              activeClassName="nav-link-active"
+            >
               Bayes Reasoning
-            </button>
-          </NavLink>
-          <span style={{ width: 25, display: "inline-block" }}></span>
-          <NavLink
-            exact
-            to={"/calculator"}
-            onClick={() => {
-              window.location = "/calculator";
-            }}
-          >
-            <button className="btn btn-danger btn-block">
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              exact
+              to={"/calculator"}
+              className="nav-link"
+              activeClassName="nav-link-active"
+            >
               Vulnerability Calculator
-            </button>
-          </NavLink>
-        </React.Fragment>
+            </NavLink>
+          </NavItem>
+        </Nav>
       );
     };
     return <NavBar />;

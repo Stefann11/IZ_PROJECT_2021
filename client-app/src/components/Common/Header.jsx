@@ -5,7 +5,7 @@ class Header extends Component {
   state = {};
   render() {
     return (
-      <header className="pt-4 w-100">
+      <header>
         <NavigationBar />
         <hr />
       </header>

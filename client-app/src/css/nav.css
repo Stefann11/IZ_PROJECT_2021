@@ -1,0 +1,17 @@
+.nav-link {
+  padding: 10px;
+  font-size: large;
+  text-decoration: none;
+}
+
+.nav-link-active {
+  padding: 10px;
+  font-size: large;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.navbar {
+  padding-left: 50px;
+  padding-right: 50px;
+}

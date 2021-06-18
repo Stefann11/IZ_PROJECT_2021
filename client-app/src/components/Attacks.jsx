@@ -92,7 +92,7 @@ class Attacks extends Component {
                   <tbody>
                     {this.props.attacks.map((f) => (
                       <tr>
-                        <td style={{ textAlign: "center" }}>{f.attack}</td>
+                        <td style={{ textAlign: "center" }}>{f.name}</td>
                         <td style={{ textAlign: "center" }}>
                           {f.likelihood_of_attack}
                         </td>

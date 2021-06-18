@@ -230,7 +230,7 @@ class CaseBaseReasoning extends Component {
                 name="likelihoodOfAttack"
               >
                 <option value=""> </option>
-                <option value="unkown">Unkown</option>
+                <option value="unknown">Unknown</option>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
@@ -263,8 +263,8 @@ class CaseBaseReasoning extends Component {
                 name="typicalSeverity"
               >
                 <option value=""> </option>
-                <option value="unkown">Unkown</option>
-                <option value="ver_low">Very low</option>
+                <option value="unknown">Unknown</option>
+                <option value="very_low">Very low</option>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
