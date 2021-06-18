@@ -1,0 +1,447 @@
+<?xml version="1.0"?>
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xml:base="http://www.ftn.uns.ac.rs/attacks"
+	xmlns:attacks="http://www.ftn.uns.ac.rs/attacks#">
+	
+	<rdf:Description rdf:about="#accessing_intercepting_modifyingHTTPCookies">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">accessing_intercepting_modifyingHTTPCookies</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">relies_on_cookies, cookie_contains_sensitive_information, response_contains_cookie</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">gain_privileges</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">use_input_validation_for_cookies, generate_and_validate_MAC_for_cookies, use_ssl/tls_to_protect_cookie_in_transit, web_server_implements_all_relevant_security_patches</attacks:mitigations>
+	</rdf:Description>
+		<rdf:Description rdf:about="#utilizing_RESTs_Trust_in_the_System_Resource_to_Obtain_Sensitive_Data">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">utilizing_RESTs_Trust_in_the_System_Resource_to_Obtain_Sensitive_Data</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">medium</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">very_high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">opportunity_to_intercept_must_exist_beyond_the_point_where_SSL_is_terminated, attacker_can_insert_listener_in_the_client_server_communication_path</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">gain_privileges</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">implement_message_level_security_such_as_hmac_in_the_http_communication, utilize_defense_in_depth, enforce_principle_of_least_privilege</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#sniff_Application_Code">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">sniff_Application_Code</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">attacker_must_be_placed_in_the_communication_path_between_client_and_server, targeted_application_must_receive_application_code_from_the_server, attacker_must_employ_sniffer_on_network_without_being_detected</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">gain_privileges</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">encrypt_all_communication_between_the_client_and_server, use_SSL_SSH_SCP, use_ifconfig/ipconfig_or_other_tools_to_detect_the_sniffer_installed_in_the_network</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#sniffing_network_traffic">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">sniffing_network_traffic</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">medium</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">target_communication_on_network_protocol_is_visible_by_network_sniffing_application, adversary_needs_logical_access_to_target_network</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">obfuscate_network_traffic_through_encryption_to_prevent_its_readability_by_network_sniffers, employ_appropriate_levels_of_segmentation_to_your_network_in_accordance_with_best_practices</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#cellular_traffic_intercept">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">cellular_traffic_intercept</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">encryption_of_all_data_packets_emanating_from_the_smartphone_to_a_retransmission_device_via_two_encrypted_tunnels_with_suite_b_cryptography</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#probe_audio_and_video_peripherals">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">probe_audio_and_video_peripherals</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">adversary_must_place_malicious_code_on_target_device</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">prevent_unknown_code_from_executing_on_a_system_through_the_use_of_an_allowlist_policy, patch_installed_applications_as_soon_as_new_updates_become_available</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#wifi_MAC_address_tracking">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">wifi_MAC_address_tracking</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">automatic_randomization_of_WiFi_MAC_addresses, frequent_changing_of_handset_and_retransmission_device</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#wifi_SSID_tracking">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">wifi_SSID_tracking</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">do_not_enable_the_feature_of_Hidden_SSIDs, frequently_change_the_SSID_to_new_and_unrelated_values</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#cellular_broadcast_message_request">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">cellular_broadcast_message_request</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">attacker_knows_targets_phone_number</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">frequent_changing_of_mobile_number</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#signal_strength_tracking">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">signal_strength_tracking</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#tcp_SYN_scan">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">tcp_SYN_scan</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">software_is_not_on_windows_XP_SP_2, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">bypass_protection_mechanism, hide_activities</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#tcp_connect_scan">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">tcp_connect_scan</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">adversary_needs_logical_access_to_the_target_network</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">employ_a_robust_network_defense_posture_that_includes_an_ids/ips_system</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#tcp_FIN_scan">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">tcp_FIN_scan</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">fin_requires_use_of_raw_sockets, software_is_not_on_windows_XP_SP_2, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">bypass_protection_mechanism, hide_activities</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">employ_a_robust_network_defense_posture_that_includes_an_ids/ips_system</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#tcp_xmas_scan">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">tcp_xmas_scan</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">adversary_needs_logical_access_to_target_network, requires_use_of_raw_sockets, software_is_not_on_windows_XP_SP_2, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">unreliable_execution</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">bypass_protection_mechanism, hide_activities</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">employ_a_robust_network_defense_posture_that_includes_an_ids/ips_system</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#tcp_null_scan">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">tcp_null_scan</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">adversary_needs_logical_access_to_target_network, requires_use_of_raw_sockets, software_is_not_on_windows_XP_SP_2, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">bypass_protection_mechanism, hide_activities</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">employ_a_robust_network_defense_posture_that_includes_an_ids/ips_system</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#tcp_ACK_scan">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">tcp_ACK_scan</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">adversary_needs_logical_access_to_target_network, requires_use_of_raw_sockets, software_is_not_on_windows_XP_SP_2, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">bypass_protection_mechanism, hide_activities</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#tcp_window_scan">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">tcp_window_scan</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">requires_use_of_raw_sockets, software_is_not_on_windows_XP_SP_2, linux_and_unix_systems_requires_root_privileges_to_use_raw_sockets</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">bypass_protection_mechanism, hide_activities</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#tcp_RPC_scan">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">tcp_RPC_scan</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">bypass_protection_mechanism, hide_activities</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">employ_a_robust_network_defense_posture_that_includes_an_ids/ips_system</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#udp_scan">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">udp_scan</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">ability_to_send_UDP_datagrams_to_host_and_receive_ICMP_error_from_that_host</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">bypass_protection_mechanism, hide_activities</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">firewalls_or_ACLs, rate_limiting_mechanisms_governing_ICMP_error_messages</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#padding_oracle_crypto_attack">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">padding_oracle_crypto_attack</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">decrtypton_routine_does_not_work_propely, target_system_leaks_data, padding_oracle_remains_available_for_enough_time</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">use_a_message_authentication_code_MAC_or_another_mechanism_to_perform_verification_of_message_authenticity/integrity_prior_to_decryption, do_not_leak_information_back_to_the_user_as_to_any_cryptography_encountered_during_decryption</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#cryptanalysis_of_cellular_encryption">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">cryptanalysis_of_cellular_encryption</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">use_of_hardened_baseband_firmware_on_retransmission_device_to_detect_and_prevent_the_use_of_weak_cellular_encryption, monitor_cellular_RF_interface_to_detect_the_usage_of_weaker_than_expected_cellular_encryption</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#contradictory_destinations_in_traffic_routing_schemes">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">contradictory_destinations_in_traffic_routing_schemes</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">medium</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">adversary_must_be_aware_that_their_message_will_be_routed_using_CDN</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data, modify_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">monitor_connections_checking_headers_in_traffic_for_contradictory_domain_names_or_empty_domain_names</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#block_logging_to_central_repository">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">block_logging_to_central_repository</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#bgp_route_disabling">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">bgp_route_disabling</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">adversary_must_have_control_of_router_that_manipulate_BGP_updates</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">implement_ingress_filters_to_check_the_validity_of_received_routes, implement_secure_BGP</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#orbital_jamming">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">orbital_jamming</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">attack_requires_knowladge_of_the_satellites_coordinates_for_targeting</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#wifi_jamming">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">wifi_jamming</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">medium</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">lack_of_anti_jam_features_in_802_11, lack_of_authentication_on_deauthentication/disassociation_packets_on_802_11_based_networks</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">other, resource_consumption</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#cellular_jamming">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">cellular_jamming</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">lack_of_anti_jam_features_in_cellular_technology</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">resource_consumption</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">by_using_a_private_cellular_LTE_network_jamming_countermeasures_could_be_developed_and_employed</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#dns_blocking">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">dns_blocking</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">attack_requires_ability_to_conduct_deep_packet_inspection_with_an_InPath_device_that_can_drop_the_targeted_traffic_and/or_connection</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">hard_coded_alternate_DNS_server_in_applications, avoid_dependence_on_DNS, include_hosts_file/ip_address_in_the_application, ensure_best_practices_with_respect_to_communications_channel_protections, use_a_onion_domain_with_Tor_support</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#ip_address_blocking">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">ip_address_blocking</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">attack_requires_ability_to_conduct_deep_packet_inspection_with_an_InPath_device_that_can_drop_the_targeted_traffic_and/or_connection</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">have_a_large_pool_of_backup_IPs_built_into_the_application_and_support_proxy_capability_in_the_application</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#cellular_data_injection">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">cellular_data_injection</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">modify_data, resource_consumption</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">commercial_defensive_technology_to_detect_and_alert_to_any_attempts_to_modify_mobile_technology_data_flows_or_to_inject_new_data_into_existing_data_flows_and_signaling_data</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#tcp_RST_injection">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">tcp_RST_injection</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">on/in_path_device</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#mobile_device_fault_injection">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">mobile_device_fault_injection</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">strong_physical_security_of_all_devices_that_contain_secret_key_information, frequent_changes_to_secret_keys_and_certificates</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#carry_off_GPS_attack">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">carry_off_GPS_attack</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">target_must_be_relying_on_valid_GPS_signal_to_preform_critical_operations</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#terrestrial_jamming">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">terrestrial_jamming</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">other</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#evil_twin_wifi_attack">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">evil_twin_wifi_attack</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">commercial_defensive_technology_that_monitors_for_rogue_Wi_Fi_access_points_man_in_the_middle_attacks_and_anomalous_activity_with_the_mobile_device_baseband_radios</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#cellular_rogue_base_station">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">cellular_rogue_base_station</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">passively_monitor_cellular_network_connection_for_real_time_threat_detection_and_logging_for_manual_review</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#interception">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">interception</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">medium</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">target_must_transmit_data_over_medium_that_is_accessible_to_adversary</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">leverage_encryption_to_encode_transmission_of_data</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#sniffing_attacks">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">sniffing_attacks</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">unknown</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">medium</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">target_must_transmit_data_over_medium_that_is_accessible_to_adversary</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">encrypt_sensitive_information_when_transmitted_on_insecure_mediums_to_prevent_interception</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#footprinting">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">footprinting</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">high</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">very_low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">application_must_publicize_identifiable_information_about_system_or_application_through_voluntary_or_involuntary_means</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">keep_patches_up_to date, shut_down_unnecessary_services, change_default_passwords_by_choosing_strong_passwords</attacks:mitigations>
+	</rdf:Description>
+	<rdf:Description rdf:about="#protocol_analysis">
+		<rdf:type rdf:resource="#Attack"/>
+		<attacks:name rdf:datatype="http://w3.org/2001/XMLSchema#string">protocol_analysis</attacks:name>
+		<attacks:likelihood_of_attack rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:likelihood_of_attack>
+		<attacks:typical_severity rdf:datatype="http://w3.org/2001/XMLSchema#string">low</attacks:typical_severity>
+		<attacks:prerequisites rdf:datatype="http://w3.org/2001/XMLSchema#string">access_to_binary_executable, ability_to_observe_and_interact_with_communication_channel_between_communicating_processes</attacks:prerequisites>
+		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
+		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
+		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:mitigations>
+	</rdf:Description>
+</rdf:RDF>
