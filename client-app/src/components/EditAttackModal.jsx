@@ -414,78 +414,91 @@ class EditAttackModal extends Component {
   };
   async componentDidMount() {
     const prerequisites = this.props.attack.prerequisites.split(",");
-    var selectedPrerequisites = [];
-    var i;
-    for (i = 0; i < prerequisites.length; i++) {
-      if (prerequisites[i].charAt(0) === " ") {
-        prerequisites[i] = prerequisites[i].substring(
-          1,
-          prerequisites[i].length
-        );
+    if (prerequisites[0] !== "") {
+      var selectedPrerequisites = [];
+      var i;
+      for (i = 0; i < prerequisites.length; i++) {
+        if (prerequisites[i].charAt(0) === " ") {
+          prerequisites[i] = prerequisites[i].substring(
+            1,
+            prerequisites[i].length
+          );
+        }
+        const test = this.state.optionsPrerequisites.filter((obj) => {
+          return obj.value === prerequisites[i];
+        });
+        selectedPrerequisites.push(test[0]);
       }
-      const test = this.state.optionsPrerequisites.filter((obj) => {
-        return obj.value === prerequisites[i];
-      });
-      selectedPrerequisites.push(test[0]);
     }
 
     const confidentialityAccessControlAuthorization =
       this.props.attack.confidentiality_access_control_authorization.split(",");
-    var selectedConfidentialityAccessControlAuthorization = [];
-    for (i = 0; i < confidentialityAccessControlAuthorization.length; i++) {
-      if (confidentialityAccessControlAuthorization[i].charAt(0) === " ") {
-        confidentialityAccessControlAuthorization[i] =
-          confidentialityAccessControlAuthorization[i].substring(
-            1,
-            confidentialityAccessControlAuthorization[i].length
+    if (confidentialityAccessControlAuthorization[0] !== "") {
+      var selectedConfidentialityAccessControlAuthorization = [];
+      for (i = 0; i < confidentialityAccessControlAuthorization.length; i++) {
+        if (confidentialityAccessControlAuthorization[i].charAt(0) === " ") {
+          confidentialityAccessControlAuthorization[i] =
+            confidentialityAccessControlAuthorization[i].substring(
+              1,
+              confidentialityAccessControlAuthorization[i].length
+            );
+        }
+        const test =
+          this.state.optionsConfidentialityAccessControlAuthorization.filter(
+            (obj) => {
+              return obj.value === confidentialityAccessControlAuthorization[i];
+            }
           );
+        selectedConfidentialityAccessControlAuthorization.push(test[0]);
       }
-      const test =
-        this.state.optionsConfidentialityAccessControlAuthorization.filter(
-          (obj) => {
-            return obj.value === confidentialityAccessControlAuthorization[i];
-          }
-        );
-      selectedConfidentialityAccessControlAuthorization.push(test[0]);
     }
 
     const availability = this.props.attack.availability.split(",");
-    var selectedAvailability = [];
-    for (i = 0; i < availability.length; i++) {
-      if (availability[i].charAt(0) === " ") {
-        availability[i] = availability[i].substring(1, availability[i].length);
+    if (availability[0] !== "") {
+      var selectedAvailability = [];
+      for (i = 0; i < availability.length; i++) {
+        if (availability[i].charAt(0) === " ") {
+          availability[i] = availability[i].substring(
+            1,
+            availability[i].length
+          );
+        }
+        const test = this.state.optionsAvailability.filter((obj) => {
+          return obj.value === availability[i];
+        });
+        selectedAvailability.push(test[0]);
       }
-      const test = this.state.optionsAvailability.filter((obj) => {
-        return obj.value === availability[i];
-      });
-      selectedAvailability.push(test[0]);
     }
 
     const confidentiality = this.props.attack.confidentiality.split(",");
-    var selectedConfidentiality = [];
-    for (i = 0; i < confidentiality.length; i++) {
-      if (confidentiality[i].charAt(0) === " ") {
-        confidentiality[i] = confidentiality[i].substring(
-          1,
-          confidentiality[i].length
-        );
+    if (confidentiality[0] !== "") {
+      var selectedConfidentiality = [];
+      for (i = 0; i < confidentiality.length; i++) {
+        if (confidentiality[i].charAt(0) === " ") {
+          confidentiality[i] = confidentiality[i].substring(
+            1,
+            confidentiality[i].length
+          );
+        }
+        const test = this.state.optionsConfidentiality.filter((obj) => {
+          return obj.value === confidentiality[i];
+        });
+        selectedConfidentiality.push(test[0]);
       }
-      const test = this.state.optionsConfidentiality.filter((obj) => {
-        return obj.value === confidentiality[i];
-      });
-      selectedConfidentiality.push(test[0]);
     }
 
     const mitigations = this.props.attack.mitigations.split(",");
-    var selectedMitigations = [];
-    for (i = 0; i < mitigations.length; i++) {
-      if (mitigations[i].charAt(0) === " ") {
-        mitigations[i] = mitigations[i].substring(1, mitigations[i].length);
+    if (mitigations[0] !== "") {
+      var selectedMitigations = [];
+      for (i = 0; i < mitigations.length; i++) {
+        if (mitigations[i].charAt(0) === " ") {
+          mitigations[i] = mitigations[i].substring(1, mitigations[i].length);
+        }
+        const test = this.state.optionsMitigations.filter((obj) => {
+          return obj.value === mitigations[i];
+        });
+        selectedMitigations.push(test[0]);
       }
-      const test = this.state.optionsMitigations.filter((obj) => {
-        return obj.value === mitigations[i];
-      });
-      selectedMitigations.push(test[0]);
     }
 
     this.setState({
