@@ -431,7 +431,7 @@
 		<attacks:availability rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:availability>
 		<attacks:confidentiality rdf:datatype="http://w3.org/2001/XMLSchema#string">read_data</attacks:confidentiality>
 		<attacks:confidentiality_access_control_authorization rdf:datatype="http://w3.org/2001/XMLSchema#string">none</attacks:confidentiality_access_control_authorization>
-		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">keep_patches_up_to date, shut_down_unnecessary_services, change_default_passwords_by_choosing_strong_passwords</attacks:mitigations>
+		<attacks:mitigations rdf:datatype="http://w3.org/2001/XMLSchema#string">keep_patches_up_to_date, shut_down_unnecessary_services, change_default_passwords_by_choosing_strong_passwords</attacks:mitigations>
 	</rdf:Description>
 	<rdf:Description rdf:about="#protocol_analysis">
 		<rdf:type rdf:resource="#Attack"/>

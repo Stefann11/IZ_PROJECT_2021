@@ -4,6 +4,10 @@ import com.example.InzenjeringProject.connector.CsvConnector;
 import com.example.InzenjeringProject.dto.CBRResultDTO;
 import com.example.InzenjeringProject.model.AttackDescription;
 import com.example.InzenjeringProject.model.Scale;
+import org.apache.jena.update.UpdateExecutionFactory;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.update.UpdateRequest;
 import org.springframework.stereotype.Service;
 import ucm.gaia.jcolibri.casebase.LinealCaseBase;
 import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
@@ -17,6 +21,7 @@ import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.local.MaxString;
 import ucm.gaia.jcolibri.method.retrieve.RetrievalResult;
 import ucm.gaia.jcolibri.method.retrieve.selection.SelectCases;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,6 +34,8 @@ public class CbrApplication implements StandardCBRApplication {
 
 	NNConfig simConfig;  /** KNN configuration */
 	private static ArrayList<CBRResultDTO> attacks = new ArrayList<CBRResultDTO>();
+	private static Boolean totalSimilarity = false;
+	private static final String UPDATE_URL = "http://localhost:3030/test/update";
 	
 	public void configure() throws ExecutionException {
 		_connector =  new CsvConnector();
@@ -68,6 +75,7 @@ public class CbrApplication implements StandardCBRApplication {
 			attacks.add(new CBRResultDTO(attackDescription.getAttack().replace("_", " "),
 					attackDescription.getMitigations().replace("_", " "), nse.getEval()));
 			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+			if(nse.getEval() == 1) totalSimilarity = true;
 		}
 	}
 
@@ -101,13 +109,36 @@ public class CbrApplication implements StandardCBRApplication {
 			attackDescription.setConfidentiality(confidentiality);
 			attackDescription.setConfidentialityAccessControlAuthorization(confidentialityAccessControlAuthorization);
 			query.setDescription( attackDescription );
+
 			recommender.cycle(query);
+
+			if(totalSimilarity == false){
+				String insertString = ""
+						+ "PREFIX attacks: <http://www.ftn.uns.ac.rs/attacks#> "
+						+ "PREFIX xsd:   <http://w3.org/2001/XMLSchema#> "
+						+ "INSERT DATA {"
+						+ "    attacks:" + LocalDateTime.now() + " a attacks:Attack;" +
+						"	   attacks:availability \"" + attackDescription.getAvailability() + "\"^^xsd:string;" +
+						"	   attacks:confidentiality \"" + attackDescription.getConfidentiality() + "\"^^xsd:string;" +
+						"	   attacks:confidentiality_access_control_authorization \"" + attackDescription.getConfidentialityAccessControlAuthorization() + "\"^^xsd:string;" +
+						"	   attacks:likelihood_of_attack \"" + attackDescription.getLikelihoodOfAttack() + "\"^^xsd:string;" +
+						"	   attacks:mitigations \"" + attackDescription.getMitigations() +  "\"^^xsd:string;" +
+						"	   attacks:name \"" + LocalDateTime.now() +  "\"^^xsd:string;" +
+						"	   attacks:prerequisites \"" + attackDescription.getPrerequisites() + "\"^^xsd:string;" +
+						"	   attacks:typical_severity \"" + attackDescription.getTypicalSeverity() + "\"^^xsd:string;" +
+						"}";
+				UpdateRequest updateRequest = UpdateFactory.create(insertString);
+				System.setProperty("http.maxConnections", "10000");
+				UpdateProcessor updateProcessor = UpdateExecutionFactory.createRemote(updateRequest, UPDATE_URL);
+				updateProcessor.execute();
+			}
 
 			recommender.postCycle();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return  attacks;
 	}
 

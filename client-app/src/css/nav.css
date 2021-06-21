@@ -7,7 +7,7 @@
 .nav-link-active {
   padding: 10px;
   font-size: large;
-  text-decoration: none;
+  text-decoration: underline;
   font-weight: bolder;
 }
 

@@ -13,6 +13,15 @@ public class AttackDescription implements CaseComponent {
 	private String confidentiality;
 	private String confidentialityAccessControlAuthorization;
 	private String mitigations;
+	private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getAttack() {
         return attack;
@@ -83,12 +92,13 @@ public class AttackDescription implements CaseComponent {
         return "AttackDescription{" +
                 "attack='" + attack + '\'' +
                 ", likelihoodOfAttack=" + likelihoodOfAttack +
-                ", typycalSeverity=" + typicalSeverity +
+                ", typicalSeverity=" + typicalSeverity +
                 ", prerequisites='" + prerequisites + '\'' +
                 ", availability='" + availability + '\'' +
                 ", confidentiality='" + confidentiality + '\'' +
                 ", confidentialityAccessControlAuthorization='" + confidentialityAccessControlAuthorization + '\'' +
                 ", mitigations='" + mitigations + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 

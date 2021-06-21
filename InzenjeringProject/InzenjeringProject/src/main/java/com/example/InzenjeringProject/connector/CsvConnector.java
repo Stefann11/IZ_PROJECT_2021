@@ -1,59 +1,76 @@
 package com.example.InzenjeringProject.connector;
 
+import com.example.InzenjeringProject.dto.RDFAttackDTO;
 import com.example.InzenjeringProject.model.AttackDescription;
 import com.example.InzenjeringProject.model.Scale;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.util.ResourceUtils;
+import org.apache.jena.query.*;
 import ucm.gaia.jcolibri.cbrcore.CBRCase;
 import ucm.gaia.jcolibri.cbrcore.CaseBaseFilter;
 import ucm.gaia.jcolibri.cbrcore.Connector;
 import ucm.gaia.jcolibri.exception.InitializingException;
-import ucm.gaia.jcolibri.util.FileIO;
 
-import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 public class CsvConnector implements Connector {
-	
+
+	private static final String QUERY_URL = "http://localhost:3030/test/sparql";
+
 	@Override
 	public Collection<CBRCase> retrieveAllCases() {
 		LinkedList<CBRCase> cases = new LinkedList<CBRCase>();
 
+		ArrayList<RDFAttackDTO> result = new ArrayList<>();
+		String queryString = "PREFIX attacks: <http://www.ftn.uns.ac.rs/attacks#> \n" +
+				"\n" +
+				"SELECT  ?attacks ?availability ?confidentiality ?confidentiality_access_control_authorization\n" +
+				"?likelihood_of_attack ?mitigations ?name ?prerequisites ?typical_severity\n" +
+				"WHERE\n" +
+				"  { ?attacks a attacks:Attack;\n" +
+				"    \tattacks:availability ?availability;\n" +
+				"     \tattacks:confidentiality ?confidentiality;\n" +
+				"      \tattacks:confidentiality_access_control_authorization ?confidentiality_access_control_authorization;\n" +
+				"       \tattacks:likelihood_of_attack ?likelihood_of_attack;\n" +
+				"        attacks:mitigations ?mitigations;\n" +
+				"        attacks:name ?name;\n" +
+				"\t\tattacks:prerequisites ?prerequisites;\n" +
+				"  \t\tattacks:typical_severity ?typical_severity.}";
+		Query query = QueryFactory.create(queryString) ;
 		try {
-			File file = ResourceUtils.getFile("classpath:attacks.csv");
-			BufferedReader br = new BufferedReader(new InputStreamReader(FileIO.openFile(file.getAbsolutePath())));
-			if (br == null)
-				throw new Exception("Error opening file");
+			System.setProperty("http.maxConnections", "10000");
+			QueryExecution qexec = QueryExecutionFactory.sparqlService(QUERY_URL, query);
 
-			String line = "";
-			while ((line = br.readLine()) != null) {
-				if (line.startsWith("#") || (line.length() == 0))
-					continue;
-				String[] values = line.split(";");
+			ResultSet results = qexec.execSelect() ;
 
-				CBRCase cbrCase = new CBRCase();
-
+			while (results.hasNext()) {
 				AttackDescription attackDescription = new AttackDescription();
-
-				attackDescription.setAttack(values[0]);
-				attackDescription.setLikelihoodOfAttack(Scale.valueOf(values[1]));
-				attackDescription.setTypicalSeverity(Scale.valueOf(values[2]));
-				attackDescription.setPrerequisites(values[3]);
-				attackDescription.setAvailability(values[4]);
-				attackDescription.setConfidentiality(values[5]);
-				attackDescription.setConfidentialityAccessControlAuthorization(values[6]);
-				attackDescription.setMitigations(values[7]);
-				
+				CBRCase cbrCase = new CBRCase();
+				QuerySolution solution = results.nextSolution() ;
+				String attack = solution.getResource("attacks").toString();
+				attackDescription.setAttack(attack.substring(33, attack.length()));
+				String likelihood_of_attack = solution.getLiteral("likelihood_of_attack").toString();
+				attackDescription.setLikelihoodOfAttack(Scale.valueOf(likelihood_of_attack.substring(0, likelihood_of_attack.length()-37)));
+				String typical_severity = solution.getLiteral("typical_severity").toString();
+				attackDescription.setTypicalSeverity(Scale.valueOf(typical_severity.substring(0, typical_severity.length()-37)));
+				String availability = solution.getLiteral("availability").toString();
+				attackDescription.setAvailability(availability.substring(0, availability.length()-37));
+				String confidentiality = solution.getLiteral("confidentiality").toString();
+				attackDescription.setConfidentiality(confidentiality.substring(0, confidentiality.length()-37));
+				String confidentiality_access_control_authorization = solution.getLiteral("confidentiality_access_control_authorization").toString();
+				attackDescription.setConfidentialityAccessControlAuthorization(confidentiality_access_control_authorization.substring(0, confidentiality_access_control_authorization.length()-37));
+				String mitigations = solution.getLiteral("mitigations").toString();
+				attackDescription.setMitigations(mitigations.substring(0, mitigations.length()-37));
+				String name = solution.getLiteral("name").toString();
+				attackDescription.setName(name.substring(0, name.length()-37));
+				String prerequisites = solution.getLiteral("prerequisites").toString();
+				attackDescription.setPrerequisites(prerequisites.substring(0, prerequisites.length()-37));
 				cbrCase.setDescription(attackDescription);
 				cases.add(cbrCase);
 			}
-			br.close();
+			return cases;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
