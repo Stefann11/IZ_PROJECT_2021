@@ -233,7 +233,7 @@ class EditAttackModal extends Component {
         label:
           "Encrypt sensitive information when transmitted on insecure mediums to prevent interception",
       },
-      { value: "keep_patches_up_to date", label: "Keep patches up to date" },
+      { value: "keep_patches_up_to_date", label: "Keep patches up to date" },
       {
         value: "shut_down_unnecessary_services",
         label: "Shut down unnecessary services",

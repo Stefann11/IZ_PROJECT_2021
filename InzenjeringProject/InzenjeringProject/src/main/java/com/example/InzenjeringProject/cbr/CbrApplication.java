@@ -122,7 +122,7 @@ public class CbrApplication implements StandardCBRApplication {
 						"	   attacks:confidentiality \"" + attackDescription.getConfidentiality() + "\"^^xsd:string;" +
 						"	   attacks:confidentiality_access_control_authorization \"" + attackDescription.getConfidentialityAccessControlAuthorization() + "\"^^xsd:string;" +
 						"	   attacks:likelihood_of_attack \"" + attackDescription.getLikelihoodOfAttack() + "\"^^xsd:string;" +
-						"	   attacks:mitigations \"" + attackDescription.getMitigations() +  "\"^^xsd:string;" +
+						"	   attacks:mitigations \"unknown\"^^xsd:string;" +
 						"	   attacks:name \"" + LocalDateTime.now() +  "\"^^xsd:string;" +
 						"	   attacks:prerequisites \"" + attackDescription.getPrerequisites() + "\"^^xsd:string;" +
 						"	   attacks:typical_severity \"" + attackDescription.getTypicalSeverity() + "\"^^xsd:string;" +
