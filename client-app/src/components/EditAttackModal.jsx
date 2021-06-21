@@ -22,6 +22,18 @@ class EditAttackModal extends Component {
         label: "Unknown",
       },
       {
+        value:
+          "do_not_leak_information_back_to_the_user_as_to_any_cryptography_encountered_during_decryption",
+        label:
+          "Do not leak information back to the user as to any cryptography encountered during decryption",
+      },
+      {
+        value:
+          "have_a_large_pool_of_backup_IPs_built_into_the_application_and_support_proxy_capability_in_the_application",
+        label:
+          "Have a large pool of backup IPs built into the application and support proxy capability in the application",
+      },
+      {
         value: "use_input_validation_for_cookies",
         label: "Use input validation for cookies",
       },
@@ -221,7 +233,7 @@ class EditAttackModal extends Component {
         label:
           "Encrypt sensitive information when transmitted on insecure mediums to prevent interception",
       },
-      { value: "keep_patches_up_to_date", label: "Keep patches up to date" },
+      { value: "keep_patches_up_to date", label: "Keep patches up to date" },
       {
         value: "shut_down_unnecessary_services",
         label: "Shut down unnecessary services",
@@ -265,6 +277,13 @@ class EditAttackModal extends Component {
           "opportunity_to_intercept_must_exist_beyond_the_point_where_SSL_is_terminated",
         label:
           "Opportunity to intercept must exist beyond the point where SSL is terminated",
+      },
+
+      {
+        value:
+          "target_must_transmit_data_over_medium_that_is_accessible_to_adversary",
+        label:
+          "Target must transmit data over medium that is accessible to adversary",
       },
       {
         value:
