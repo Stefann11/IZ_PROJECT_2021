@@ -1,7 +1,7 @@
 # IZ_PROJECT_2021
 
 Uputstvo za pokretanje aplikacije:
- 1. Importovati Meaven projekat PharmacyWebApplication.
+ 1. Importovati Meaven projekat InzenjeringProject.
  2. Otvoriti folder client-app, koji predstavlja front-end projekta u nekom od odgovarajućih programa (npr. Visual Studio Code).
  3. U terminalu Visual Studio Code-a ukucati npm install da bi se instalirale sve potrebne datoteke za React.
  4. Pokrenuti fuseki-server (apache-jena-fuseki-3.11.0 -> apache-jena-fuseki-3.11.0 -> fuseki-server Executable Jar File). Kreirati novi dataset pod nazivom inzenjering-znanja i tu učitati polazne podatke (napade) iz attacks.rdf file-a.
