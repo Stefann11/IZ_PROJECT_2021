@@ -8,3 +8,5 @@ Uputstvo za pokretanje aplikacije:
  5. Pokrenuti serversku aplikaciju (Meaven project). (pokreće se na portu 8081), dodatne biblioteke koje je potrebno importovati (U Intellij-u dodati preko File -> Project Structure -> New Project Library) se nalaze u folderu lib u korenskom direktorijumu.
  6. U terminalu Visual Studio Code-a ukucati npm start da bi se pokrenuo front-end. (pokreće se na frontu 3000)
  7. Posle par sekundi, u browseru bi trebala da se otvori početna stranica.
+
+Link do demo-a: https://youtu.be/6nM_C2blfKY
