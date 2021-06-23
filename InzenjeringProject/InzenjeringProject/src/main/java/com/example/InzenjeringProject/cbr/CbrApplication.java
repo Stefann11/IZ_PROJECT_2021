@@ -35,7 +35,7 @@ public class CbrApplication implements StandardCBRApplication {
 	NNConfig simConfig;  /** KNN configuration */
 	private static ArrayList<CBRResultDTO> attacks = new ArrayList<CBRResultDTO>();
 	private static Boolean totalSimilarity = false;
-	private static final String UPDATE_URL = "http://localhost:3030/test/update";
+	private static final String UPDATE_URL = "http://localhost:3030/inzenjering-znanja/update";
 	
 	public void configure() throws ExecutionException {
 		_connector =  new CsvConnector();

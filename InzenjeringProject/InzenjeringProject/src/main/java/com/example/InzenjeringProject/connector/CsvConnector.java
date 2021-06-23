@@ -17,7 +17,7 @@ import java.util.LinkedList;
 
 public class CsvConnector implements Connector {
 
-	private static final String QUERY_URL = "http://localhost:3030/test/sparql";
+	private static final String QUERY_URL = "http://localhost:3030/inzenjering-znanja/sparql";
 
 	@Override
 	public Collection<CBRCase> retrieveAllCases() {
