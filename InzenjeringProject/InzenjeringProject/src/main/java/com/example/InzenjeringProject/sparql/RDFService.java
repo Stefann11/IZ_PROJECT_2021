@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 @Service
 public class RDFService {
-    private static final String QUERY_URL = "http://localhost:3030/test/sparql";
-    private static final String UPDATE_URL = "http://localhost:3030/test/update";
+    private static final String QUERY_URL = "http://localhost:3030/inzenjering-znanja/sparql";
+    private static final String UPDATE_URL = "http://localhost:3030/inzenjering-znanja/update";
 
     public RDFAttackDTO insert(RDFAttackDTO attack) {
         String insertString = ""
